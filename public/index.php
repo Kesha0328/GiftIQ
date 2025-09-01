@@ -4,47 +4,47 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Mad Smile | Gift Hampers</title>
-  <link rel="stylesheet" href="index.css"/>
-  <script defer src="app.js"></script>
+  <link rel="stylesheet" href="assets/index.css"/>
+  <script defer src="js/app.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
   <header class="navbar">
-    <div class="logo"><img src="logo.png"></div>
+    <div class="logo"><img src="images/logo.png"></div>
     <nav class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="collection.html">Collection</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-      <a href="login.html">Login</a>
-      <a href="signup.html">Sign Up</a>
+      <a href="index.php" class="active">Home</a>
+      <a href="collection.php">Collection</a>
+      <a href="about.php">About</a>
+      <a href="contact.php">Contact</a>
+      <a href="login.php">Login</a>
+      <a href="signup.php">Sign Up</a>
     </nav>
   </header>
 
 <section class="hero">
   <div class="hero-slider">
     <div class="hero-slide active">
-      <img src="1.jpeg" alt="Classic Hamper">
+      <img src="images/1.jpeg" alt="Classic Hamper">
       <div class="hero-slide-text">
         <h1>Crafted with Joy, Wrapped with Love</h1>
         <p>Discover the perfect gift hamper for every occasion</p>
-        <a href="collection.html" class="btn-primary">Order Now</a>
+        <a href="collection.php" class="btn-primary">Order Now</a>
       </div>
     </div>
     <div class="hero-slide">
-      <img src="2.jpeg" alt="Birthday Bliss">
+      <img src="images/2.jpeg" alt="Birthday Bliss">
       <div class="hero-slide-text">
         <h1>Birthday Bliss Hampers</h1>
         <p>Make birthdays extra special with our curated hampers</p>
-        <a href="collection.html" class="btn-primary">Order Now</a>
+        <a href="collection.php" class="btn-primary">Order Now</a>
       </div>
     </div>
     <div class="hero-slide">
-      <img src="3.jpeg" alt="Elegant Joy Crate">
+      <img src="images/3.jpeg" alt="Elegant Joy Crate">
       <div class="hero-slide-text">
         <h1>Elegant Joy Crate</h1>
         <p>Elegant Joy Crate Simply Elegant. Purely Joyful. Thoughtfully Curated for Moments That Matter.</p>
-        <a href="collection.html" class="btn-primary">Order Now</a>
+        <a href="collection.php" class="btn-primary">Order Now</a>
       </div>
     </div>
   </div>
@@ -68,40 +68,40 @@
     <h2>Best Sellers</h2>
     <div class="cards">
       <div class="card">
-        <img src="10.jpeg" alt="Hamper 1"/>
+        <img src="images/10.jpeg" alt="Hamper 1"/>
         <h3>Classic Love Box</h3>
         <p>₹1,499</p>
-        <a href="collection.html" class="btn-primary">Add to Cart</a>
+        <a href="collection.php" class="btn-primary">Add to Cart</a>
       </div>
       <div class="card">
-        <img src="5.jpeg" alt="Hamper 2"/>
+        <img src="images/5.jpeg" alt="Hamper 2"/>
         <h3>Birthday Bliss</h3>
         <p>₹1,799</p>
-        <a href="collection.html" class="btn-primary">Add to Cart</a>
+        <a href="collection.php" class="btn-primary">Add to Cart</a>
       </div>
       <div class="card">
-        <img src="6.jpeg" alt="Hamper 3"/>
+        <img src="images/6.jpeg" alt="Hamper 3"/>
         <h3>Elegant Joy Crate</h3>
         <p>₹2,099</p>
-        <a href="collection.html" class="btn-primary">Add to Cart</a>
+        <a href="collection.php" class="btn-primary">Add to Cart</a>
       </div>
       <div class="card">
-        <img src="7.jpeg" alt="Hamper 4"/>
+        <img src="images/7.jpeg" alt="Hamper 4"/>
         <h3>Festive Cheer Basket</h3>
         <p>₹1,999</p>
-        <a href="collection.html" class="btn-primary">Add to Cart</a>
+        <a href="collection.php" class="btn-primary">Add to Cart</a>
       </div>
       <div class="card">
-        <img src="8.jpeg" alt="Hamper 5"/>
+        <img src="images/8.jpeg" alt="Hamper 5"/>
         <h3>Wellness Delight</h3>
         <p>₹1,599</p>
-        <a href="collection.html" class="btn-primary">Add to Cart</a>
+        <a href="collection.php" class="btn-primary">Add to Cart</a>
       </div>
       <div class="card">
-        <img src="9.jpeg" alt="Hamper 6"/>
+        <img src="images/9.jpeg" alt="Hamper 6"/>
         <h3>Luxury Treat Box</h3>
         <p>₹2,499</p>
-        <a href="collection.html" class="btn-primary">Add to Cart</a>
+        <a href="collection.php" class="btn-primary">Add to Cart</a>
       </div>
     </div>
   </section>

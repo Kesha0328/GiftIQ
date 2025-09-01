@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mad Smile - Contact</title>
-  <link rel="stylesheet" href="contact.css" />
+  <link rel="stylesheet" href="assets/contact.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
   <header class="navbar">
-    <div class="logo"><img src="logo.png"></div>
+    <div class="logo"><img src="images/logo.png"></div>
     <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="collection.html">Collection</a>
-      <a href="about.html">About</a>
-      <a href="contact.html" class="active">Contact</a>
-      <a href="login.html">Login</a>
-      <a href="signup.html">Sign Up</a>
+      <a href="index.php">Home</a>
+      <a href="collection.php">Collection</a>
+      <a href="about.php">About</a>
+      <a href="contact.php" class="active">Contact</a>
+      <a href="login.php">Login</a>
+      <a href="signup.php">Sign Up</a>
     </nav>
   </header>
 
