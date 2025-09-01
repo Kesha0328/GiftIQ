@@ -17,7 +17,6 @@
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
       <a href="login.html">Login</a>
-      <a href="login.html">Login</a>
       <a href="signup.html">Sign Up</a>
     </nav>
   </header>
