@@ -16,8 +16,8 @@
       <a href="collection.php">Collection</a>
       <a href="about.php">About</a>
       <a href="contact.php">Contact</a>
-      <a href="login.php">Login</a>
-      <a href="signup.php">Sign Up</a>
+      <a href="../views/aut/login.php">Login</a>
+      <a href="../views/aut/signup.php">Sign Up</a>
     </nav>
   </header>
 
