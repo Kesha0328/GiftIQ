@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,17 +12,27 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
-  <header class="navbar">
-    <div class="logo"><img src="images/logo.png"></div>
-    <nav class="nav-links">
-      <a href="index.php">Home</a>
-      <a href="collection.php">Collection</a>
-      <a href="about.php" class="active">About</a>
-      <a href="contact.php">Contact</a>
-      <a href="login.php">Login</a>
-      <a href="signup.php">Sign Up</a>
-    </nav>
-  </header>
+
+<header class="navbar">
+  <div class="logo"><img src="images/logo.png" alt="logo"></div>
+
+  <nav class="nav-links">
+    <a href="index.php">Home</a>
+    <a href="collection.php">Collection</a>
+    <a href="about.php" class="active">About</a>
+    <a href="contact.php">Contact</a>
+
+    <?php if (isset($_SESSION['fullname'])): ?>
+      <!-- user is logged in -->
+      <a href="/GIFTIQ/views/aut/profile.php">Profile (<?= htmlspecialchars($_SESSION['fullname']); ?>)</a>
+      <a href="/GIFTIQ/views/aut/logout.php">Logout</a>
+    <?php else: ?>
+      <!-- user not logged in -->
+      <a href="/GIFTIQ/views/aut/login.php">Login</a>
+      <a href="/GIFTIQ/views/aut/signup.php">Sign Up</a>
+    <?php endif; ?>
+  </nav>
+</header>
 
 <div class="about-section">
   <h1>About Mad Smile</h1>
