@@ -59,13 +59,7 @@ session_start();
   </div>
 </div>
 
-  <footer class="footer">
-    <p>&copy; 2025 Mad Smile – Because every smile deserves a gift.</p>
-    <div class="social-icons">
-  <a href="mailto:madsmileee@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
-  <a href="https://github.com/Kesha0328" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-  <a href="https://www.instagram.com/mad_smileee" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-</div>
-  </footer>
+  <?php include 'footer.php'; ?>
+
 </body>
 </html>

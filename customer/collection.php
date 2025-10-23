@@ -42,5 +42,9 @@ $collections = $conn->query("SELECT * FROM collections");
       </div>
     </div>
   <?php endwhile; ?>
+
+          <?php include 'footer.php'; ?>
+
+
 </body>
 </html>

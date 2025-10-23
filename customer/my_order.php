@@ -103,5 +103,8 @@ $result = $conn->query($sql);
             </table>
         <?php } ?>
     </div>
+
+    <?php include 'footer.php'; ?>
+
 </body>
 </html>

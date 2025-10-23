@@ -1,61 +1,135 @@
 <?php
 session_start();
+include("header.php");
+
+// Include PHPMailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require '../PHPMailer/src/Exception.php';
+require '../PHPMailer/src/PHPMailer.php';
+require '../PHPMailer/src/SMTP.php';
+
+$success = "";
+$error = "";
+
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
+    $subject = trim($_POST['subject']);
+    $message = trim($_POST['message']);
+
+    if ($name && $email && $message) {
+
+        $mail = new PHPMailer(true);
+
+        try {
+            // Server settings
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            
+            // 🔴 Replace these with your Gmail credentials
+            $mail->Username   = 'denishsaliya@gmail.com';   // your Gmail
+            $mail->Password   = 'byzr lpev fsbb fvvs';     // Gmail App Password (see below)
+            
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
+
+            // Recipients
+            $mail->setFrom('yourgmail@gmail.com', 'GiftIQ Website');
+            $mail->addAddress('yourgmail@gmail.com', 'Admin'); // where you’ll receive messages
+            $mail->addReplyTo($email, $name);
+
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = "New Contact Message from $name - GiftIQ";
+            $mail->Body    = "
+                <h2>New Inquiry from GiftIQ</h2>
+                <p><strong>Name:</strong> {$name}</p>
+                <p><strong>Email:</strong> {$email}</p>
+                <p><strong>Subject:</strong> {$subject}</p>
+                <p><strong>Message:</strong></p>
+                <p>{$message}</p>
+                <hr><p style='color:#888;'>Sent from GiftIQ Website</p>
+            ";
+
+            $mail->send();
+            $success = "✅ Thank you, $name! Your message has been sent successfully.";
+        } catch (Exception $e) {
+            $error = "❌ Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+    } else {
+        $error = "⚠️ Please fill out all required fields.";
+    }
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mad Smile - Contact</title>
-  <link rel="stylesheet" href="assets/contact.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <meta charset="UTF-8">
+  <title>Contact Us - GiftIQ</title>
+  <link rel="stylesheet" href="assets/contact.css">
 </head>
 <body>
-  
-<?php include "header.php"; ?>
 
+<div class="contact-main-container fadeInUp">
+  <!-- Left Section -->
+  <section class="contact-info-panel">
+    <h2>📍 Get in Touch</h2>
+    <p>Have a question or feedback? We’re here to help you make gifting magical!</p>
 
-<div class="contact-main-container">
-  <div class="contact-info-panel">
-    <h2>Contact Us</h2>
-    <p>We'd love to hear from you! Reach out for orders, feedback, or partnership.</p>
     <div class="contact-details">
-      <strong><i class="fas fa-envelope"></i> Email:</strong> madsmileee@gmail.com<br>
-      <strong><i class="fas fa-phone"></i> Phone:</strong> +91 98765 43210<br>
-      <strong><i class="fas fa-map-marker-alt"></i> Address:</strong> 123 Smile Street, Ahmedabad, India
+      <strong>📍 Address</strong>
+      123 GiftIQ Street, Mumbai, India
     </div>
+
+    <div class="contact-details">
+      <strong>📞 Phone</strong>
+      +91 98765 43210
+    </div>
+
+    <div class="contact-details">
+      <strong>✉️ Email</strong>
+      support@giftiq.com
+    </div>
+
     <div class="contact-hours">
-      <i class="fas fa-clock"></i> Mon-Sat: 10am - 7pm<br>
-      <i class="fas fa-clock"></i> Sun: Closed
+      🕒 <strong>Hours:</strong> Mon – Sat: 9:00 AM – 6:00 PM
     </div>
-    <div class="contact-social">
-      <a href="mailto:madsmileee@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-      <a href="https://github.com/Kesha0328" title="GitHub"><i class="fab fa-github"></i></a>
-      <a href="https://www.instagram.com/mad_smileee" title="Instagram"><i class="fab fa-instagram"></i></a>
-    </div>
-  </div>
-  <div class="form-container">
-    <h3>Send Us a Message</h3>
-    <div class="form-desc">Fill out the form and our team will get back to you soon.</div>
-    <form class="contact-form">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
+  </section>
+
+  <!-- Right Section -->
+  <section class="form-container">
+    <h3>💌 Send Us a Message</h3>
+    <p class="form-desc">Fill out the form below and we’ll respond soon.</p>
+
+    <?php if ($success): ?>
+      <div class="contact-success"><?= $success ?></div>
+    <?php elseif ($error): ?>
+      <div class="contact-error"><?= $error ?></div>
+    <?php endif; ?>
+
+    <form class="contact-form" method="POST" action="">
+      <input type="text" name="name" placeholder="Your Name *" required>
+      <input type="email" name="email" placeholder="Your Email *" required>
+      <input type="text" name="subject" placeholder="Subject">
+      <textarea name="message" placeholder="Your Message *" rows="5" required></textarea>
+      <button type="submit">Send Message ✨</button>
     </form>
-  </div>
+  </section>
 </div>
-<div class="map-section">
-  <iframe src="https://maps.google.com/maps?q=Ahmedabad&t=&z=13&ie=UTF8&iwloc=&output=embed"></iframe>
+
+<div class="map-section fadeInUp">
+  <iframe
+    src="https://maps.google.com/maps?q=Surat&t=&z=13&ie=UTF8&iwloc=&output=embed"
+    allowfullscreen="" loading="lazy"></iframe>
 </div>
-<footer class="footer">
-  <p>&copy; 2025 Mad Smile – Because every smile deserves a gift.</p>
-  <div class="social-icons">
-    <a href="mailto:madsmileee@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
-    <a href="https://github.com/Kesha0328" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-    <a href="https://www.instagram.com/mad_smileee" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-  </div>
-</footer>
+
+<?php include 'footer.php'; ?>
+
+
+
 </body>
 </html>

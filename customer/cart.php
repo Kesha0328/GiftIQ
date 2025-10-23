@@ -53,6 +53,9 @@ if (!empty($_SESSION['cart'])) {
     <link rel="stylesheet" href="customerpanel.css">
 </head>
 <body>
+
+<?php include "header.php"; ?>
+
     <div class="collection-header">
         <h1>🛒 My Cart</h1>
     </div>
@@ -92,5 +95,7 @@ if (!empty($_SESSION['cart'])) {
             </div>
         <?php } ?>
     </div>
+    <?php include 'footer.php'; ?>
+
 </body>
 </html>

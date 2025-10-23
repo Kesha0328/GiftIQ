@@ -416,3 +416,82 @@ a {
     height: 180px;
   }
 }
+
+
+
+
+/* ✅ Popup Overlay */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 240, 240, 0.7);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.4s ease;
+}
+
+/* ✅ Popup Box */
+.popup-content {
+  background: linear-gradient(135deg, #ffe6b3, #efd8d6);
+  color: #333;
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: center;
+  animation: popupScale 0.4s ease;
+  max-width: 380px;
+}
+
+/* ✅ Animated Checkmark */
+.checkmark {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  background: #e87c7c;
+  color: white;
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 15px auto;
+  animation: popCheck 0.4s ease-in-out;
+}
+
+/* ✅ Close Button */
+#close-popup {
+  background: #e87c7c;
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-size: 1rem;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+#close-popup:hover {
+  background: #d56767;
+  transform: translateY(-2px);
+}
+
+/* ✅ Animations */
+@keyframes popupScale {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes popCheck {
+  0% { transform: scale(0); opacity: 0; }
+  80% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
