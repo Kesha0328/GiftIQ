@@ -1,0 +1,131 @@
+/* header.css - responsive header / mobile panel */
+:root{
+  --nav-bg: #fff;
+  --accent: #f7d4d1;
+  --accent2: #ffe6b3;
+  --nav-shadow: 0 6px 24px rgba(0,0,0,0.08);
+}
+
+header.navbar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 5%;
+  background:var(--nav-bg);
+  box-shadow:var(--nav-shadow);
+  position:sticky;
+  top:0;
+  z-index:12000; /* high so it sits over page */
+}
+
+/* Left hamburger toggle */
+.menu-toggle {
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  width:40px;
+  height:40px;
+  align-items:center;
+  justify-content:center;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  padding:6px;
+  margin-right:8px;
+}
+.menu-toggle span {
+  display:block;
+  width:22px;
+  height:2.6px;
+  background:#d47474;
+  border-radius:2px;
+  transition:transform .25s, opacity .25s;
+}
+.menu-toggle.open span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+.menu-toggle.open span:nth-child(2){ opacity:0; }
+.menu-toggle.open span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
+/* logo */
+.logo img{ height:44px; display:block; }
+
+/* nav links (desktop) */
+.nav-links {
+  display:flex;
+  gap:14px;
+  align-items:center;
+  justify-content:flex-end;
+  z-index:12001;
+  transition:all .25s ease;
+}
+.nav-links a {
+  padding:8px 12px;
+  border-radius:8px;
+  font-weight:500;
+  color:#333;
+  background:transparent;
+  text-decoration:none;
+}
+.nav-links a.active,
+.nav-links a:hover {
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  color:#fff;
+}
+
+/* MOBILE PANEL (hidden by default) */
+@media (max-width: 992px) {
+  /* when mobile, push nav off-canvas and show as full-screen panel */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 100vh;
+    background: #fff;
+    flex-direction: column;
+    padding-top: 86px; /* space for header */
+    align-items:center;
+    gap:18px;
+    transform: translateY(-10%);
+    opacity:0;
+    pointer-events: none;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.08);
+    border-radius: 0 0 18px 18px;
+  }
+
+  .nav-links.mobile-open{
+    transform: translateY(0);
+    opacity:1;
+    pointer-events: auto;
+  }
+
+  .nav-links a {
+    width: 88%;
+    max-width: 700px;
+    text-align:center;
+    padding:14px 18px;
+    background: #fff9f7;
+    border-radius:10px;
+    box-shadow: 0 6px 18px rgba(239,216,214,0.3);
+  }
+
+  /* keep header compact and toggle left */
+  header.navbar { padding:8px 4%; }
+  .logo { margin-left: 8px; }
+}
+
+/* Accessibility focus styles */
+.nav-links a:focus,
+.menu-toggle:focus {
+  outline: 3px solid rgba(247,180,163,0.25);
+  outline-offset: 2px;
+}
+
+/* Prevent nav overlay blocking interactive page elements (maps etc.)
+   When panel is visible it has high z-index; otherwise page elements are above nav.
+*/
+.map-section, iframe, .contact-info-panel, .form-container {
+  position: relative;
+  z-index: 0;
+}
