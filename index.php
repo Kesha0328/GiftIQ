@@ -145,7 +145,14 @@ session_start();
     <div id="feedbackDisplay"></div>
   </section>
 
-<?php include(__DIR__ . '/customer/footer.php'); ?>
+  <footer class="footer">
+    <p>&copy; <?= date('Y') ?> Mad Smile – Because every smile deserves a gift.</p>
+    <div class="social-icons">
+      <a href="mailto:madsmileee@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+      <a href="https://github.com/Kesha0328" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://www.instagram.com/mad_smileee" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
 
   <script>
   let slides = document.querySelectorAll('.hero-slide');
