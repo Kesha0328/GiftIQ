@@ -1,6 +1,6 @@
 
 <footer class="footer">
-  <p>&copy; 2025 <strong>Mad Smile</strong> – Because every smile deserves a gift.</p>
+  <p>&copy; 2025 Mad Smile – Because every smile deserves a gift.</p>
 
   <div class="social-icons">
     <a href="mailto:madsmileee@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
@@ -40,7 +40,6 @@ main {
   color: #e2a6a4;
   font-size: 1.15rem;
   box-shadow: 0 4px 24px rgba(239, 216, 214, 0.25);
-  border-radius: 0 0 25px 25px;
   animation: fadeIn 1.5s;
 }
 
@@ -74,8 +73,6 @@ main {
 }
 
 .footer .social-icons a:hover {
-  transform: scale(1.15) rotate(-6deg);
-  background: linear-gradient(135deg, #ffe6b3, #efd8d6);
   box-shadow: 0 6px 16px rgba(239, 216, 214, 0.8);
 }
 

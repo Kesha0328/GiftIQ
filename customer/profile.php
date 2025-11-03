@@ -71,19 +71,59 @@ $orders = $conn->query("SELECT id, total, status, created_at FROM orders WHERE u
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" type="image/png" href="../uploads/favicon.png" />
 <style>
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #fff4e8, #ffe8d6);
-  margin: 0;
-  padding: 0;
-  color: #333;
+/* ----------- GLOBAL STYLES ----------- */
+:root {
+  /* Define main colors for easy changes */
+  --primary-color: #d47474;
+  --primary-light: #f7b4a3;
+  --secondary-light: #ffdba1;
+  --bg-page: linear-gradient(135deg, #fff4e8, #ffe8d6);
+  --bg-card: #fff;
+  --bg-alt: #f1f1f1;
+  --text-dark: #333;
+  --text-light: #777;
+  --border-color: #f3dede;
+  --shadow-soft: 0 4px 16px rgba(0,0,0,0.05);
+  --shadow-medium: 0 6px 16px rgba(212, 116, 116, 0.4);
 }
 
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-page);
+  margin: 0;
+  padding: 0;
+  color: var(--text-dark);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 40px auto; /* Reduced margin */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  padding: 20px;
+}
+
+h3 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/* ----------- TITLE ----------- */
 .profile-title {
   text-align: center;
   font-size: 3rem;
   font-weight: 900;
-  background: linear-gradient(90deg, #e8594fff, #f5a732ff);
+  background: var(--primary-color); /* Use variable */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-top: 20px;
@@ -95,157 +135,128 @@ body {
 
 .profile-title i {
   margin-right: 8px;
-  color: #f81818ff;
+  /* [FIX] Changed from bright red to match text */
+  color: var(--primary-color); 
 }
 
-.profile-title::after {
-  content: "";
-  display: block;
-  width: 120px;
-  height: 4px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, #f7b4a3, #ffdba1);
-  margin: 3px auto 0;
-}
-
-@keyframes fadeInDown {
-  from { opacity: 0; transform: translateY(-20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-
-
-.container {
-  max-width: 1200px;
-  margin: 60px auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  justify-content: center;
-  padding: 20px;
-}
-
+/* --- Profile Card (Left) --- */
 .profile-card {
-    flex: 0 0 320px;
-  background: #fff;
-  height: 260px;
-margin-top: -30px;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  flex: 0 0 320px;
+  background: var(--bg-card);
+  padding: 1.5rem; /* 24px */
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
   text-align: center;
   animation: fadeIn 1s ease;
+  height: fit-content; /* Let height be automatic */
 }
-.profile-card:hover { transform: translateY(-4px); }
 
 .avatar {
-  width: 130px;
-  height: 130px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #f7b4a3, #ffdba1);
+  background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 40px;
+  color: var(--bg-card);
+  font-size: 32px;
   font-weight: 700;
-  margin: 0 auto 15px;
+  margin: 0 auto 1rem;
   overflow: hidden;
 }
 .avatar img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 50%;
 }
 
 .profile-card h2 {
-  color: #d47474;
-  font-size: 1.4rem;
-  margin-bottom: 6px;
+  color: var(--text-dark);
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
 }
 
 .profile-card p {
-  color: #777;
-  font-size: 0.95rem;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
 }
 
 .profile-card form {
-  margin-top: 15px;
-}
-.upload-btn {
-  background: linear-gradient(135deg, #f8d7c8, #ffeab5);
-  border: none;
-  border-radius: 10px;
-  padding: 10px 18px;
-  margin: 5px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.2s;
-}
-.upload-btn:hover {
-  transform: translateY(-2px);
+  display: flex;
+  flex-direction: column; 
+  gap: 0.5rem;
 }
 
+/* --- Profile Details (Right) --- */
 .profile-details {
   flex: 1;
-  background: #fff;
+  background: var(--bg-card);
   border-radius: 20px;
-  margin-top: -30px;
-  padding: 40px 50px;
+  margin-top: -30px; /* This is the overlap effect */
+  padding: 30px 35px; /* Reduced padding */
   box-shadow: 0 10px 30px rgba(0,0,0,0.06);
   min-width: 350px;
 }
 
-h3 {
-  color: #d47474;
-  margin-bottom: 20px;
-  text-align: center;
-  font-size: 1.5rem;
-}
-
-label {
+.profile-details label {
   display: block;
   font-weight: 600;
-  color: #d47474;
+  /* [FIX] Changed from pink to a readable dark gray */
+  color: #555; 
   margin: 12px 0 5px;
 }
 
-input {
+.profile-details input {
   width: 100%;
   padding: 14px 16px;
   border-radius: 12px;
-  border: 2px solid #f3dede;
+  border: 2px solid var(--border-color);
   background: #fffdfb;
   font-size: 1rem;
   transition: all 0.2s ease;
 }
-input:focus {
-  border-color: #f7b4a3;
+.profile-details input:focus {
+  border-color: var(--primary-light);
   outline: none;
   box-shadow: 0 0 0 3px rgba(247,180,163,0.25);
 }
 
-.btn-primary, .btn-secondary {
+/* --- UNIFIED BUTTON STYLES --- */
+/* This one base class replaces all other button styles */
+.btn {
   border: none;
   border-radius: 12px;
   padding: 12px 18px;
   font-weight: 600;
   cursor: pointer;
-  margin: 10px 5px;
+  font-size: 0.9rem;
+  text-align: center;
   transition: all 0.3s ease;
 }
-.btn-primary {
-  background: linear-gradient(135deg, #f7d4d1, #ffe6b3);
-  color: #333;
-}
-.btn-primary:hover { transform: translateY(-3px); }
-.btn-secondary {
-  background: #f5f5f5;
-  color: #666;
-}
-.btn-secondary:hover { background: #ececec; }
 
+/* Primary action (Save, Upload, etc.) */
+.btn-primary {
+  background: var(--primary-color); 
+  color: #fff;
+}
+.btn-primary:hover {
+   box-shadow: var(--shadow-soft);
+}
+
+/* Secondary action (Cancel, View, etc.) */
+.btn-secondary {
+  background: var(--bg-alt); 
+  color: #555;
+}
+.btn-secondary:hover {
+  box-shadow: var(--shadow-soft);
+}
+/* --- END OF UNIFIED STYLES --- */
+
+
+/* --- Other Components --- */
 .success, .error {
   padding: 12px;
   border-radius: 10px;
@@ -260,17 +271,37 @@ input:focus {
 }
 .order-box {
   background: #fff9f8;
-  border: 1px solid #f3dede;
+  border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 12px 16px;
   margin-bottom: 10px;
   line-height: 1.6;
 }
-.order-box strong { color: #d47474; }
+.order-box strong { color: var(--primary-color); }
 
+/* ----------- RESPONSIVE (MOBILE) FIX ----------- */
 @media(max-width:768px) {
-  .container { flex-direction: column; align-items: center; }
-  .profile-details { width: 95%; padding: 30px; }
+  .container { 
+    flex-direction: column; 
+    align-items: center; 
+    margin-top: 20px;
+    gap: 20px; /* Closer together on mobile */
+  }
+
+  .profile-card {
+    /* This card is now on top, so it needs a 
+       bottom margin, not a negative top margin */
+    margin-top: 0;
+  }
+  
+  .profile-details { 
+    width: 95%; 
+    padding: 25px 20px;
+    /* [THE BUG FIX] 
+       Resets the negative margin to 0 so it 
+       doesn't crash into the card above it. */
+    margin-top: 0; 
+  }
 }
 </style>
 
@@ -298,8 +329,10 @@ input:focus {
     <form method="post" enctype="multipart/form-data">
       <input type="hidden" name="action" value="upload_avatar">
       <input type="file" name="avatar" accept="image/*" id="avatarInput" style="display:none;">
-      <button type="button" class="upload-btn" onclick="document.getElementById('avatarInput').click()">Upload</button>
-      <button type="submit" class="upload-btn">Save</button>
+      
+      <button type="button" class="btn btn-secondary" onclick="document.getElementById('avatarInput').click()">Upload</button>
+      
+      <button type="submit" class="btn btn-primary">Save</button>
     </form>
   </div>
 
@@ -338,8 +371,9 @@ input:focus {
       <label>Confirm Password</label>
       <input type="password" name="confirm_password">
 
-      <button type="submit" class="btn-primary">💾 Save Changes</button>
-      <button type="reset" class="btn-secondary">✖ Cancel</button>
+      <button type="submit" class="btn btn-primary">💾 Save Changes</button>
+      
+      <button type="reset" class="btn btn-secondary">✖ Cancel</button>
     </form>
 
     <div class="orders">

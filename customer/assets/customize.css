@@ -93,7 +93,6 @@ textarea {
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(232,124,124,0.15);
 }
 

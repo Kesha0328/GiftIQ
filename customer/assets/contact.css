@@ -307,44 +307,6 @@ a {
   display: block;
 }
 
-/* Footer */
-.footer {
-  text-align: center;
-  padding: 2rem 0 1rem 0;
-  background: #fff;
-  color: var(--accent-pink);
-  font-size: 1.1rem;
-  box-shadow: var(--shadow);
-  border-radius: 0 0 20px 20px;
-  animation: fadeIn 1.5s;
-  position: relative;
-  overflow-x: hidden;
-}
-.footer .social-icons {
-  margin: 1rem 0 0 0;
-  display: flex;
-  justify-content: center;
-  gap: 1.2rem;
-}
-.footer .social-icons a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none !important;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent-pink), var(--accent-gold));
-  color: #fff;
-  font-size: 1.4rem;
-  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-  box-shadow: 0 2px 8px #efd8d6;
-}
-.footer .social-icons a:hover {
-  transform: scale(1.15);
-  background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink));
-  box-shadow: 0 4px 16px #efd8d6;
-}
 @keyframes fadeIn {
   from { opacity: 0;}
   to { opacity: 1;}
