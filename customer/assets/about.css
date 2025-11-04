@@ -172,6 +172,7 @@ body {
   overflow: hidden;
 }
 .team-member:hover {
+  transform: translateY(-8px) scale(1.03);
   box-shadow: 0 8px 32px #efd8d6;
 }
 .team-member img {

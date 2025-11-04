@@ -100,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     .page-title h1{
       margin:0;
-      font-size:2rem;
+      font-size:1.5rem;
       color:var(--accent-text);
       background: linear-gradient(90deg,#f4b8b4,#ffd9a0);
       -webkit-background-clip:text;

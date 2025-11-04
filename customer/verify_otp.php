@@ -79,45 +79,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       font-size: 0.95rem;
       margin-bottom: 1.2rem;
     }
-/* You can call this class whatever you want */
-.input-wrapper {
-  /* This padding creates the "surrounded space" 
-     on the left and right. */
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-input[type="text"] {
-  width: 100%;
-  padding: 0.8rem;
-  font-size: 1.1rem;
-  border-radius: 10px;
-  border: 2px solid #f3dede;
-  background: #fffdfb;
-  text-align: center;
-  letter-spacing: 4px;
-  font-weight: bold;
-  outline: none;
-  margin-bottom: 1rem;
-  transition: border-color 0.3s;
-  
-  /* ADD THIS LINE:
-    This is a best practice. It tells the browser to include
-    your 'padding' and 'border' INSIDE the 'width: 100%',
-    so it doesn't overflow.
-  */
-  box-sizing: border-box;
-}
 
-input[type="text"]:focus {
-  border-color: var(--accent-pink);
-}
+    input[type="text"] {
+      width: 100%;
+      padding: 0.8rem;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      border: 2px solid #f3dede;
+      background: #fffdfb;
+      text-align: center;
+      letter-spacing: 4px;
+      font-weight: bold;
+      outline: none;
+      margin-bottom: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus {
+      border-color: var(--accent-pink);
+    }
 
     .btn-primary {
       background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink));
       color: #fff;
       border: none;
       padding: 0.9rem;
-      width: 160px;
+      width: 100%;
       font-weight: 700;
       font-size: 1rem;
       border-radius: 12px;
@@ -126,6 +113,7 @@ input[type="text"]:focus {
     }
 
     .btn-primary:hover {
+      transform: translateY(-3px);
       box-shadow: 0 6px 18px rgba(232,124,124,0.25);
     }
 
@@ -176,10 +164,9 @@ input[type="text"]:focus {
     <?php endif; ?>
 
     <form method="post">
-      <div class="input-wrapper">
       <input type="text" name="otp" maxlength="6" placeholder="Enter OTP" required>
       <button type="submit" class="btn-primary">Verify OTP</button>
-  </div>
     </form>
+  </div>
 </body>
 </html>

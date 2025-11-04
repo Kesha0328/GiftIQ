@@ -104,44 +104,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       font-size: 1.8rem;
       margin-bottom: 1rem;
     }
-input {
-  width: 100%;
-  padding: 0.8rem;
-  font-size: 1.1rem;
-  border-radius: 10px;
-  border: 2px solid #f3dede;
-  background: #fffdfb;
-  text-align: center;
-  letter-spacing: 4px;
-  font-weight: bold;
-  outline: none;
-  margin-bottom: 1rem;
-  transition: border-color 0.3s;
-  
-  /* ADD THIS LINE:
-    This is a best practice. It tells the browser to include
-    your 'padding' and 'border' INSIDE the 'width: 100%',
-    so it doesn't overflow.
-  */
-  box-sizing: border-box;
-}
+    input {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 0.6rem 0;
+      border: 2px solid #f3dede;
+      border-radius: 10px;
+      font-size: 1rem;
+      outline: none;
+    }
     input:focus {
       border-color: #f7b47d;
     }
     .btn-primary {
-      width: 160px;
+      width: 100%;
       background: linear-gradient(135deg, #ffe6b3, #f7d4d1);
       color: #fff;
       border: none;
       border-radius: 10px;
       padding: 0.9rem;
       font-weight: 700;
-      font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s;
     }
     .btn-primary:hover {
-      box-shadow: 0 6px 18px rgba(232,124,124,0.25);
+      transform: translateY(-3px);
     }
     .error {
       background: #ffe6e6;

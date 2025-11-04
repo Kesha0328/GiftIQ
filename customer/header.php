@@ -44,8 +44,8 @@ $current = basename($_SERVER['PHP_SELF']);
       <span></span><span></span><span></span>
     </button>
 
-    <a class="logo" href="/GiftIQ/index.php" aria-label="GiftIQ home">
-      <img src="/GiftIQ/customer/images/logo.png" alt="GiftIQ" class="logo-img">
+    <a class="logo" href="/GiftIQ-main/index.php" aria-label="GiftIQ home">
+      <img src="/GiftIQ-main/customer/images/logo.png" alt="GiftIQ" class="logo-img">
     </a>
   </div>
 
@@ -54,18 +54,18 @@ $current = basename($_SERVER['PHP_SELF']);
 
   <!-- RIGHT: normal desktop links (hidden on small screens) -->
   <nav class="nav-links desktop-only" role="navigation" aria-label="Primary">
-    <a href="/GiftIQ/index.php" class="<?= $current == 'index.php' ? 'active' : '' ?>">Home</a>
-    <a href="/GiftIQ/customer/collection.php" class="<?= $current == 'collection.php' ? 'active' : '' ?>">Collection</a>
-    <a href="/GiftIQ/customer/customize.php" class="<?= $current == 'customize.php' ? 'active' : '' ?>">Customize</a>
-    <a href="/GiftIQ/customer/my_order.php" class="<?= $current == 'my_order.php' ? 'active' : '' ?>">My Orders</a>
-    <a href="/GiftIQ/customer/contact.php" class="<?= $current == 'contact.php' ? 'active' : '' ?>">Contact</a>
-    <a href="/GiftIQ/customer/about.php" class="<?= $current == 'about.php' ? 'active' : '' ?>">About</a>
-    <a href="/GiftIQ/customer/cart.php" class="cart-link">🛒 Cart (<?= intval($cart_count) ?>)</a>
+    <a href="/GiftIQ-main/index.php" class="<?= $current == 'index.php' ? 'active' : '' ?>">Home</a>
+    <a href="/GiftIQ-main/customer/collection.php" class="<?= $current == 'collection.php' ? 'active' : '' ?>">Collection</a>
+    <a href="/GiftIQ-main/customer/customize.php" class="<?= $current == 'customize.php' ? 'active' : '' ?>">Customize</a>
+    <a href="/GiftIQ-main/customer/my_order.php" class="<?= $current == 'my_order.php' ? 'active' : '' ?>">My Orders</a>
+    <a href="/GiftIQ-main/customer/contact.php" class="<?= $current == 'contact.php' ? 'active' : '' ?>">Contact</a>
+    <a href="/GiftIQ-main/customer/about.php" class="<?= $current == 'about.php' ? 'active' : '' ?>">About</a>
+    <a href="/GiftIQ-main/customer/cart.php" class="cart-link">🛒 Cart (<?= intval($cart_count) ?>)</a>
     <?php if (!empty($_SESSION['fullname'])): ?>
-      <a href="/GiftIQ/customer/profile.php" class="profile-link">Profile (<?= htmlspecialchars($_SESSION['fullname']) ?>)</a>
-      <a href="/GiftIQ/customer/logout.php" class="logout-link">Logout</a>
+      <a href="/GiftIQ-main/customer/profile.php" class="profile-link">Profile (<?= htmlspecialchars($_SESSION['fullname']) ?>)</a>
+      <a href="/GiftIQ-main/customer/logout.php" class="logout-link">Logout</a>
     <?php else: ?>
-      <a href="/GiftIQ/customer/login.php" class="login-link">Login</a>
+      <a href="/GiftIQ-main/customer/login.php" class="login-link">Login</a>
     <?php endif; ?>
   </nav>
 </header>
@@ -79,19 +79,19 @@ $current = basename($_SERVER['PHP_SELF']);
   </div>
 
   <nav class="mobile-links" role="navigation" aria-label="Mobile primary">
-    <a href="/GiftIQ/index.php" class="<?= $current == 'index.php' ? 'active' : '' ?>">Home</a>
-    <a href="/GiftIQ/customer/collection.php" class="<?= $current == 'collection.php' ? 'active' : '' ?>">Collection</a>
-    <a href="/GiftIQ/customer/customize.php" class="<?= $current == 'customize.php' ? 'active' : '' ?>">Customize</a>
-    <a href="/GiftIQ/customer/my_order.php" class="<?= $current == 'my_order.php' ? 'active' : '' ?>">My Orders</a>
-    <a href="/GiftIQ/customer/contact.php" class="<?= $current == 'contact.php' ? 'active' : '' ?>">Contact</a>
-    <a href="/GiftIQ/customer/about.php" class="<?= $current == 'about.php' ? 'active' : '' ?>">About</a>
-    <a href="/GiftIQ/customer/cart.php">🛒 Cart (<?= intval($cart_count) ?>)</a>
+    <a href="/GiftIQ-main/index.php" class="<?= $current == 'index.php' ? 'active' : '' ?>">Home</a>
+    <a href="/GiftIQ-main/customer/collection.php" class="<?= $current == 'collection.php' ? 'active' : '' ?>">Collection</a>
+    <a href="/GiftIQ-main/customer/customize.php" class="<?= $current == 'customize.php' ? 'active' : '' ?>">Customize</a>
+    <a href="/GiftIQ-main/customer/my_order.php" class="<?= $current == 'my_order.php' ? 'active' : '' ?>">My Orders</a>
+    <a href="/GiftIQ-main/customer/contact.php" class="<?= $current == 'contact.php' ? 'active' : '' ?>">Contact</a>
+    <a href="/GiftIQ-main/customer/about.php" class="<?= $current == 'about.php' ? 'active' : '' ?>">About</a>
+    <a href="/GiftIQ-main/customer/cart.php">🛒 Cart (<?= intval($cart_count) ?>)</a>
 
     <?php if (!empty($_SESSION['fullname'])): ?>
-      <a href="/GiftIQ/customer/profile.php">Profile (<?= htmlspecialchars($_SESSION['fullname']) ?>)</a>
-      <a href="/GiftIQ/customer/logout.php">Logout</a>
+      <a href="/GiftIQ-main/customer/profile.php">Profile (<?= htmlspecialchars($_SESSION['fullname']) ?>)</a>
+      <a href="/GiftIQ-main/customer/logout.php">Logout</a>
     <?php else: ?>
-      <a href="/GiftIQ/customer/login.php">Login</a>
+      <a href="/GiftIQ-main/customer/login.php">Login</a>
     <?php endif; ?>
   </nav>
 
@@ -112,29 +112,53 @@ $current = basename($_SERVER['PHP_SELF']);
   align-items: center;
   padding: 10px 5%;
   background: #fff;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
 }
-.logo-img { height: 42px; display:block; }
+.logo-img {
+  height: 42px;
+  display: block;
+}
 
-.nav-links a { margin-left: 10px; text-decoration:none; padding:8px 12px; border-radius:8px; color:#222; font-weight:500; }
-.nav-links a.active, .nav-links a:hover {
-  background: linear-gradient(135deg,#f7b4a3,#ffdba1);
+.nav-links a {
+  margin-left: 10px;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  color: #222;
+  font-weight: 500;
+}
+.nav-links a.active,
+.nav-links a:hover {
+  background: linear-gradient(135deg, #f7b4a3, #ffdba1);
   color: #fff;
 }
 
 .menu-toggle {
   display: inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:44px; height:44px;
-  border-radius:10px;
-  border:0;
-  background:transparent;
-  cursor:pointer;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
 }
-.menu-toggle span { display:block; width:22px; height:2px; background:#d47474; margin:3px 0; border-radius:2px; transition:all .25s; }
+.menu-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #d47474;
+  margin: 3px 0;
+  border-radius: 2px;
+  transition: all 0.25s;
+}
 
-.desktop-only { display:flex; gap:8px; align-items:center; }
+.desktop-only {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
 
 .mobile-menu {
   position: fixed;
@@ -145,41 +169,90 @@ $current = basename($_SERVER['PHP_SELF']);
   height: 100vh;
   background: #fff;
   z-index: 10000;
-  box-shadow: 6px 0 24px rgba(0,0,0,0.12);
-  transition: left .36s cubic-bezier(.2,.9,.3,1);
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
+  box-shadow: 6px 0 24px rgba(0, 0, 0, 0.12);
+  transition: left 0.36s cubic-bezier(0.2, 0.9, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.mobile-menu.open { left: 0; }
+.mobile-menu.open {
+  left: 0;
+}
 
-.mobile-menu-head { display:flex; align-items:center; justify-content:space-between; padding:18px; border-bottom:1px solid #f3e6e2; }
-.menu-close { background:transparent; border:0; font-size:20px; cursor:pointer; color:#d47474; }
+.mobile-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px;
+  border-bottom: 1px solid #f3e6e2;
+}
+.menu-close {
+  background: transparent;
+  border: 0;
+  font-size: 20px;
+  cursor: pointer;
+  color: #d47474;
+}
 
-.mobile-links { padding:22px; display:flex; flex-direction:column; gap:12px; }
-.mobile-links a { padding:12px 14px; border-radius:10px; text-decoration:none; color:#333; background:#fff7f6; font-weight:600; text-align:left; }
-.mobile-links a.active, .mobile-links a:hover { background: linear-gradient(135deg,#f7b4a3,#ffdba1); color:#fff; transform:translateX(2px); }
+.mobile-links {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mobile-links a {
+  padding: 12px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #333;
+  background: #fff7f6;
+  font-weight: 600;
+  text-align: left;
+}
+.mobile-links a.active,
+.mobile-links a:hover {
+  background: linear-gradient(135deg, #f7b4a3, #ffdba1);
+  color: #fff;
+  transform: translateX(2px);
+}
 
-.mobile-footer { padding:16px; border-top:1px solid #f3e6e2; text-align:center; color:#777; font-size:0.9rem; }
+.mobile-footer {
+  padding: 16px;
+  border-top: 1px solid #f3e6e2;
+  text-align: center;
+  color: #777;
+  font-size: 0.9rem;
+}
 
 .menu-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0, 0, 0, 0.45);
   opacity: 0;
   visibility: hidden;
-  transition: opacity .3s ease;
+  transition: opacity 0.3s ease;
   z-index: 9999;
 }
-.menu-overlay.active { opacity: 1; visibility: visible; }
+.menu-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
 
 @media (max-width: 992px) {
-  .desktop-only { display:none; }
+  .desktop-only {
+    display: none;
+  }
 }
 @media (min-width: 993px) {
-  .menu-toggle { display: none; }
-  .mobile-menu, .menu-overlay { display:none; }
+  .menu-toggle {
+    display: none;
+  }
+  .mobile-menu,
+  .menu-overlay {
+    display: none;
+  }
 }
+
 </style>
 
 <script>

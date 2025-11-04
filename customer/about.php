@@ -71,7 +71,7 @@ session_start();
     text-align:center;
     transition:transform .22s, box-shadow .22s;
   }
-  .team-member:hover{box-shadow:0 14px 30px rgba(0,0,0,0.08); }
+  .team-member:hover{ transform:translateY(-6px); box-shadow:0 14px 30px rgba(0,0,0,0.08); }
 
   .team-member img{
     width:110px; height:110px; object-fit:cover;

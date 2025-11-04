@@ -40,6 +40,7 @@ main {
   color: #e2a6a4;
   font-size: 1.15rem;
   box-shadow: 0 4px 24px rgba(239, 216, 214, 0.25);
+  border-radius: 0 0 25px 25px;
   animation: fadeIn 1.5s;
 }
 

@@ -8,20 +8,23 @@
   --shadow: 0 4px 24px rgba(239,216,214,0.18);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 body {
-  font-family: var(--font);
-  background: var(--bg-light);
-  color: var(--text-dark);
-  scroll-behavior: smooth;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+  background: linear-gradient(120deg, #efd8d6, #ffe6b3, #f7f3ed, #efd8d6);
+  background-size: 400% 400%;
+  animation: gradientMove 8s ease-in-out infinite;
+  transition: background 0.4s, color 0.4s;
 }
+@keyframes gradientMove {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
 a {
-  text-decoration: none;
-  color: inherit;
+  text-decoration: none !important;
 }
 
 .navbar {
@@ -87,6 +90,7 @@ a {
 }
 .collection-header {
   background: linear-gradient(90deg, #efd8d6 60%, #ffe6b3 100%);
+  border-radius: 0 0 24px 24px;
   box-shadow: 0 4px 24px #efd8d6;
   margin-bottom: 2rem;
   padding: 2.5rem 2vw 2rem 2vw;
@@ -94,7 +98,7 @@ a {
 }
 .collection-header h1 {
   font-size: 2.5rem;
-  color: #fff;
+  color: #e2c3c1;
   font-weight: 900;
   letter-spacing: 2px;
   margin-bottom: 1.2rem;
@@ -330,6 +334,43 @@ a {
   transform: scale(1.04);
 }
 
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem 0 1rem 0;
+  background: #fff;
+  color: #efd8d6;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 24px #efd8d6;
+  border-radius: 0 0 20px 20px;
+  animation: fadeIn 1.5s;
+  position: relative;
+}
+.footer .social-icons {
+  margin: 1rem 0 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+.footer .social-icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #efd8d6, #ffe6b3);
+  color: #fff;
+  font-size: 1.4rem;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+  box-shadow: 0 2px 8px #efd8d6;
+  text-decoration: none !important;
+}
+.footer .social-icons a:hover {
+  transform: scale(1.15) rotate(-8deg);
+  background: linear-gradient(135deg, #ffe6b3, #efd8d6);
+  box-shadow: 0 4px 16px #efd8d6;
+}
 @keyframes fadeIn {
   from { opacity: 0;}
   to { opacity: 1;}
