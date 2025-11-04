@@ -73,148 +73,273 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <link rel="icon" type="image/png" href="../uploads/favicon.png" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    :root{
-      --bg: linear-gradient(135deg,#fff8f6,#ffeecb);
-      --card:#fff;
-      --accent: #f7d4d1;
-      --accent-2:#ffe6b3;
-      --accent-text:#d47474;
-      --muted:#666;
-      --shadow: 0 8px 24px rgba(0,0,0,0.06);
-      --radius: 14px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;}
-    body{
-      margin:0;
-      font-family:'Poppins',sans-serif;
-      background:var(--bg);
-      color:#333;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
+    /* =========================================
+   1. ROOT VARIABLES
+   ========================================= */
+:root {
+  --bg: linear-gradient(135deg, #fff8f6, #ffeecb);
+  --card: #fff;
+  --accent: #f7d4d1;
+  --accent-2: #ffe6b3;
+  --accent-text: #d47474;
+  --muted: #666;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --radius: 14px;
+}
 
-    .page-title {
-      text-align:center;
-      margin: 2rem 0 1rem;
-    }
-    .page-title h1{
-      margin:0;
-      font-size:1.5rem;
-      color:var(--accent-text);
-      background: linear-gradient(90deg,#f4b8b4,#ffd9a0);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      font-weight:700;
-    }
+/* =========================================
+   2. GLOBAL & BASE STYLES
+   ========================================= */
+* {
+  box-sizing: border-box;
+}
 
-    .contact-wrap{
-      width:92%;
-      max-width:1100px;
-      margin: 0 auto 3rem;
-      display:flex;
-      gap:1.8rem;
-      align-items:flex-start;
-      padding: 1.2rem;
-    }
+html,
+body {
+  height: 100%; /* Ensure html/body take full height */
+}
 
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:1.6rem;
-    }
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-    .form-panel{
-      flex:1 1 55%;
-      min-width:280px;
-    }
-    .form-panel h2{ color:var(--accent-text); margin:0 0 8px; font-size:1.05rem}
-    .form-desc{ color:var(--muted); margin-bottom:12px; }
+/* =========================================
+   3. PAGE LAYOUT & WRAPPERS
+   ========================================= */
+.page-title {
+  text-align: center;
+  margin: 2rem 0 1rem;
+}
+.page-title h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--accent-text); /* Fallback */
+  background: linear-gradient(90deg, #f4b8b4, #ffd9a0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+}
 
-    .form-row { display:flex; flex-direction:column; gap:0.75rem; }
+/* Main 2-column container */
+.contact-wrap {
+  width: 92%;
+  max-width: 1100px;
+  margin: 0 auto 3rem;
+  display: flex;
+  gap: 1.8rem;
+  align-items: flex-start;
+  padding: 1.2rem;
+}
 
-    .form-row input[type="text"],
-    .form-row input[type="email"],
-    .form-row textarea {
-      width:100%;
-      padding:12px 14px;
-      border-radius:10px;
-      border:2px solid #f3dede;
-      background:#fffdfb;
-      font-size:1rem;
-      resize:vertical;
-    }
-    .form-row textarea{ min-height:110px; }
+/* Spacer at the bottom, likely for a fixed nav */
+.page-bottom-spacer {
+  height: 110px;
+}
 
-    .submit-btn {
-      display:inline-block;
-      width:100%;
-      padding:12px;
-      border-radius:12px;
-      border:0;
-      color:#fff;
-      font-weight:700;
-      cursor:pointer;
-      background: linear-gradient(90deg,var(--accent),var(--accent-2));
-      margin-top:8px;
-      box-shadow: 0 6px 18px rgba(247,180,163,0.12);
-    }
-    .submit-btn:active{ transform: translateY(1px); }
+/* =========================================
+   4. COMPONENTS
+   ========================================= */
 
-    .info-panel{
-      flex:1 1 38%;
-      min-width:260px;
-    }
-    .info-panel h3{ color:var(--accent-text); margin:0 0 8px; font-size:1rem; }
-    .info-list p{ margin:8px 0; color:var(--muted); line-height:1.3; }
+/* --- Base Card Style --- */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.6rem;
+}
 
-    .alert {
-      padding:10px 12px;
-      border-radius:8px;
-      margin-bottom:12px;
-      font-weight:600;
-    }
-    .success{ background:#d4edda; color:#155724; }
-    .error{ background:#f8d7da; color:#721c24; }
+/* --- Form Panel (Left Column) --- */
+.form-panel {
+  flex: 1 1 55%;
+  min-width: 280px;
+  /* Note: This component uses .card styles */
+}
+.form-panel h2 {
+  color: var(--accent-text);
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+}
+.form-desc {
+  color: var(--muted);
+  margin-bottom: 12px;
+  font-size: 0.95rem; /* Slightly smaller for 'description' */
+}
 
-    .map-wrap{ width:100%; text-align:center; margin-top:1.2rem; }
-    .map-wrap iframe{
-      width:100%;
-      max-width:720px;
-      height:320px;
-      border:0;
-      border-radius:10px;
-    }
+/* --- Form Elements --- */
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.form-row input[type="text"],
+.form-row input[type="email"],
+.form-row textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 2px solid #f3dede;
+  background: #fffdfb;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif; /* Ensure font is inherited */
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-row input[type="text"]:focus,
+.form-row input[type="email"]:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(247, 212, 209, 0.5);
+}
+.form-row textarea {
+  min-height: 110px;
+}
 
-    .page-bottom-spacer{
-      height:110px;
-    }
+/* --- Submit Button --- */
+.submit-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 0;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem; /* Explicitly set font size */
+  cursor: pointer;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  margin-top: 8px;
+  box-shadow: 0 6px 18px rgba(247, 180, 163, 0.12);
+  transition: box-shadow 0.25s ease;
+}
+.submit-btn:hover {
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+}
 
-    @media (max-width: 768px){
-      .contact-wrap{
-        flex-direction:column;
-        padding: 1rem;
-        gap:1rem;
-      }
+/* --- Info Panel (Right Column) --- */
+.info-panel {
+  flex: 1 1 38%;
+  min-width: 260px;
+  /* Note: This component uses .card styles */
+}
+.info-panel h3 {
+  color: var(--accent-text);
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+.info-list p {
+  margin: 8px 0;
+  color: var(--muted);
+  line-height: 1.3;
+}
 
-      .form-panel{ order: 1; }
-      .info-panel{ order: 2; }
-      .map-wrap{ order: 3; }
+/* --- Alert Boxes --- */
+.alert {
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 0.95rem; /* Slightly smaller */
+}
+.success {
+  background: #d4edda;
+  color: #155724;
+}
+.error {
+  background: #f8d7da;
+  color: #721c24;
+}
 
-      .form-panel, .info-panel { width:100%; box-shadow: var(--shadow); padding:1rem; border-radius:12px; }
-      .map-wrap iframe { height:260px; }
+/* --- Map Section --- */
+.map-wrap {
+  width: 92%; /* Match .contact-wrap width */
+  max-width: 1100px; /* Match .contact-wrap max-width */
+  margin: 0 auto 1.2rem; /* Centered and spaced */
+  text-align: center;
+}
+.map-wrap iframe {
+  width: 100%;
+  /* Max-width removed, as parent controls it now */
+  height: 320px;
+  border: 0;
+  border-radius: 10px;
+}
 
-      body { padding-bottom: 120px; }
+/* =========================================
+   5. RESPONSIVE MEDIA QUERIES
+   ========================================= */
 
-      .page-title h1{ font-size:1.25rem; margin-top:0.6rem; }
-      .form-row textarea{ min-height:120px; }
-    }
+/* --- Tablet & Large Phone --- */
+@media (max-width: 768px) {
+  .contact-wrap {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
 
-    @media (max-width:420px){
-      .form-row input[type="text"], .form-row input[type="email"] { padding:10px; font-size:0.95rem; }
-      .submit-btn { padding:11px; font-size:0.98rem; }
-    }
+  /* This rule applies card styles to the panels on mobile.
+    On desktop, this is handled by adding the .card class in the HTML.
+  */
+  .form-panel,
+  .info-panel {
+    width: 100%;
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  /* Re-ordering the stacked items */
+  .form-panel {
+    order: 1;
+  }
+  .info-panel {
+    order: 2;
+  }
+  
+  /* Note: .map-wrap order: 3 was in the original file, 
+    but it won't work as .map-wrap is not a child of .contact-wrap.
+    The natural document flow already places it third.
+  */
+  
+  .map-wrap {
+    padding: 0 1rem; /* Add padding to match container */
+    width: 100%; /* Ensure it's full-width */
+  }
+  .map-wrap iframe {
+    height: 260px;
+  }
+
+  body {
+    /* Ensures space for a potential mobile bottom nav */
+    padding-bottom: 120px;
+  }
+
+  .page-title h1 {
+    font-size: 1.25rem;
+    margin-top: 0.6rem;
+  }
+  .form-row textarea {
+    min-height: 120px;
+  }
+}
+
+/* --- Small Mobile --- */
+@media (max-width: 420px) {
+  .form-row input[type="text"],
+  .form-row input[type="email"],
+  .form-row textarea { /* Added textarea here */
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+  .submit-btn {
+    padding: 11px;
+    font-size: 0.98rem;
+  }
+}
   </style>
 </head>
 <body>

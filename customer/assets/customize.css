@@ -1,12 +1,19 @@
+/* =========================================
+   1. ROOT VARIABLES
+   ========================================= */
 :root {
   --accent-pink: #f7d4d1;
   --accent-gold: #ffe6b3;
   --accent-text: #d47474;
   --white: #fff;
-  --shadow: 0 8px 24px rgba(0,0,0,0.06);
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
-html, body {
+/* =========================================
+   2. BASE & RESET
+   ========================================= */
+html,
+body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
@@ -15,6 +22,11 @@ html, body {
   overflow-x: hidden;
 }
 
+/* =========================================
+   3. SHARED COMPONENTS
+   ========================================= */
+
+/* --- Page Header --- */
 .collection-header {
   text-align: center;
   margin: 2.5rem 0 1.6rem;
@@ -27,56 +39,7 @@ html, body {
   font-weight: 700;
 }
 
-/* === Main Layout === */
-.customize-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 2rem;
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto 5rem;
-  padding-bottom: 80px;
-}
-
-.customize-section {
-  flex: 1 1 55%;
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-}
-
-.customize-section h2 {
-  color: var(--accent-text);
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.customize-section label {
-  display: block;
-  color: var(--accent-text);
-  font-weight: 600;
-  margin-bottom: .4rem;
-}
-
-.customize-section select,
-.customize-section textarea,
-.customize-section input {
-  width: 100%;
-  padding: .8rem;
-  border: 2px solid #f3dede;
-  border-radius: 10px;
-  background: #fffdfb;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-}
-
-textarea {
-  min-height: 80px;
-  resize: vertical;
-}
-
+/* --- Primary Button --- */
 .btn-primary {
   background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink));
   border: none;
@@ -91,20 +54,73 @@ textarea {
   z-index: 10;
   margin-bottom: 1rem;
 }
-
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(232,124,124,0.15);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
 }
 
-/* === Desktop Preview === */
-.live-preview {
-  flex: 1 1 40%;
+/* =========================================
+   4. MAIN LAYOUT CONTAINER
+   ========================================= */
+.customize-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto 5rem;
+  padding-bottom: 80px; /* Extra space at the bottom */
+}
+
+/* =========================================
+   5. CUSTOMIZE FORM SECTION (Left Column)
+   ========================================= */
+.customize-section {
+  flex: 1 1 55%; /* Takes 55% of the space */
   background: var(--white);
   padding: 2rem;
   border-radius: 18px;
   box-shadow: var(--shadow);
-  position: sticky;
+}
+.customize-section h2 {
+  color: var(--accent-text);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/* --- Form element styles --- */
+.customize-section label {
+  display: block;
+  color: var(--accent-text);
+  font-weight: 600;
+  margin-bottom: .4rem;
+}
+.customize-section select,
+.customize-section textarea,
+.customize-section input {
+  width: 100%;
+  padding: .8rem;
+  border: 2px solid #f3dede;
+  border-radius: 10px;
+  background: #fffdfb;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* =========================================
+   6. LIVE PREVIEW (Right Column)
+   ========================================= */
+.live-preview {
+  flex: 1 1 40%; /* Takes 40% of the space */
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  position: sticky; /* Sticks to the top on desktop scroll */
   top: 6rem;
   align-self: flex-start;
   transition: all .4s ease;
@@ -115,27 +131,41 @@ textarea {
   font-weight: 700;
 }
 
-/* === Mobile: preview below form === */
+/* =========================================
+   7. KEYFRAME ANIMATIONS
+   ========================================= */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================
+   8. RESPONSIVE (Tablet & Mobile)
+   ========================================= */
 @media (max-width: 900px) {
+  /* Stack the columns vertically */
   .customize-container {
     flex-direction: column;
     align-items: center;
   }
 
-  .customize-section, .live-preview {
+  /* Make both columns full-width and remove sticky positioning */
+  .customize-section,
+  .live-preview {
     width: 95%;
-    position: static;
+    position: static; /* Un-sticks the preview panel */
     margin: 0 auto 1.5rem;
   }
 
+  /* Move the preview panel below the form */
   .live-preview {
     order: 2;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
   }
-}
-
-/* Animations */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
 }

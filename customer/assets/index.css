@@ -1,12 +1,14 @@
 /* ----------- MAD SMILE HOMEPAGE STYLES ----------- */
 /* REFACTOR NOTES (v3):
-   - Applied container styles (max-width, margin) DIRECTLY to 
-     section classes (.hero, .featured, etc.) to fix all layout issues.
-   - Added `margin-top` to all sections to fix "closely touching" problem.
-   - Redesigned Feedback Form to be white, minimal, and professional.
+   - Applied container styles (max-width, margin) DIRECTLY to 
+     section classes (.hero, .featured, etc.) to fix all layout issues.
+   - Added `margin-top` to all sections to fix "closely touching" problem.
+   - Redesigned Feedback Form to be white, minimal, and professional.
 */
 
-/* --- 1. Global & Root Variables --- */
+/* =========================================
+   1. Global & Root Variables
+   ========================================= */
 :root {
   --bg-light: #f7f3ed;
   --accent-pink: #f7b4a3;
@@ -19,7 +21,9 @@
   --font: "Poppins", sans-serif;
 }
 
-/* --- 2. Base & Reset --- */
+/* =========================================
+   2. Base & Reset
+   ========================================= */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -51,7 +55,9 @@ img {
   display: block;
 }
 
-/* --- 3. Reusable Components --- */
+/* =========================================
+   3. Reusable Components
+   ========================================= */
 
 .btn-primary {
   display: inline-block;
@@ -62,11 +68,11 @@ img {
   border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.3s ease;
+  transition: box-shadow 0.3s ease;
 }
 
 .btn-primary:hover {
-  opacity: 0.85;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
 }
 
 /* Universal styles for section titles */
@@ -93,10 +99,12 @@ img {
   box-shadow: 0 8px 24px rgba(239, 216, 214, 0.7);
 }
 
-/* --- 4. Section Layout & Spacing --- */
-/* THIS IS THE MAIN FIX:
-  We apply container styles directly to your <section> tags.
-  This fixes "no side margin" and "closely touching" issues.
+/* =========================================
+   4. Section Layout & Spacing
+   ========================================= */
+/* THIS IS THE MAIN FIX (from your v3 notes):
+  Container styles are applied directly to section tags 
+  to fix side margins and vertical spacing.
 */
 .hero,
 .about-hampers,
@@ -114,9 +122,11 @@ img {
   box-shadow: var(--shadow);
 }
 
-/* --- 5. Section-Specific Styles --- */
+/* =========================================
+   5. Section-Specific Styles
+   ========================================= */
 
-/* HERO */
+/* --- 5.1 HERO --- */
 .hero {
   padding: 2rem; /* Hero has slightly different padding */
   background: linear-gradient(120deg, var(--white), #ffeae6);
@@ -176,10 +186,10 @@ img {
   color: var(--text-light);
 }
 
-/* ABOUT */
+/* --- 5.2 ABOUT --- */
 .about-hampers {
   background: var(--white);
-  max-width: 900px; /* This section is narrower, which is good */
+  max-width: 900px; /* This section is narrower */
   text-align: center;
 }
 
@@ -211,7 +221,7 @@ img {
   background: var(--white);
 }
 
-/* FEATURED (4-CARD GRID) */
+/* --- 5.3 FEATURED (4-CARD GRID) --- */
 .featured {
   background: var(--white);
   text-align: center;
@@ -227,14 +237,12 @@ img {
 
 .cards {
   display: grid;
-  /* This will now create 4 columns on desktop because 
-     .featured is constrained to 1200px. */
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
 }
 
 .card {
-  /* This uses .card-base styles by default */
+  /* This style is intentionally different from .card-base */
   background: var(--white);
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(239, 216, 214, 0.7);
@@ -263,11 +271,11 @@ img {
 
 .card p {
   font-weight: 500;
-  margin-bottom: 1rem; /* More space before button */
+  margin-bottom: 1rem;
   color: var(--text-light);
 }
 
-/* HOW IT WORKS */
+/* --- 5.4 HOW IT WORKS --- */
 .how-it-works {
   background: var(--white);
   text-align: center;
@@ -312,7 +320,7 @@ img {
   color: var(--accent-gold);
 }
 
-/* TESTIMONIALS */
+/* --- 5.5 TESTIMONIALS --- */
 .testimonials {
   background: var(--white);
   text-align: center;
@@ -359,7 +367,9 @@ img {
   font-size: 1.1rem;
 }
 
-/* --- 6. Feedback Form (NEW DESIGN) --- */
+/* =========================================
+   6. Feedback Form (NEW DESIGN)
+   ========================================= */
 .feedback-unique {
   background: var(--white); /* Clean white background */
   text-align: center;
@@ -456,7 +466,9 @@ img {
   font-size: 1.1rem;
 }
 
-/* --- 8. Scroll Animation --- */
+/* =========================================
+   7. Scroll Animation (Renumbered from 8)
+   ========================================= */
 [data-scroll] {
   opacity: 0;
   transition: opacity 1s cubic-bezier(0.5, 0, 0, 1);
@@ -466,9 +478,11 @@ img {
   opacity: 1;
 }
 
-/* --- 9. Responsive --- */
+/* =========================================
+   8. Responsive (Renumbered from 9)
+   ========================================= */
 
-/* -- Small Tablet (approx 601px - 768px) -- */
+/* --- 8.1 Tablet (approx 601px - 768px) --- */
 @media (max-width: 768px) {
   /* Reduce padding on mobile for all sections */
   .hero,
@@ -501,7 +515,7 @@ img {
   /* Grids will naturally be 2 columns here */
 }
 
-/* -- Mobile (max 600px) -- */
+/* --- 8.2 Mobile (max 600px) --- */
 @media (max-width: 600px) {
   .hero-slider {
     min-height: 520px;
@@ -545,6 +559,4 @@ img {
     padding: 0.7rem 1.5rem;
     font-size: 0.9rem;
   }
-
-  
 }

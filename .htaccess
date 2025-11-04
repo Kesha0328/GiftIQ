@@ -37,7 +37,7 @@ RewriteBase /GiftIQ-main/
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
     
     # Use modern CSP rules (allow localhost assets)
-    Header always set Content-Security-Policy "default-src 'self' http://localhost https://kit.fontawesome.com https://cdnjs.cloudflare.com; img-src * data: blob:; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline' https://kit.fontawesome.com https://cdnjs.cloudflare.com; font-src 'self' data: https://cdnjs.cloudflare.com;"
+   Header set Content-Security-Policy "script-src 'self' 'unsafe-inline' https://kit.fontawesome.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net"
 </IfModule>
 
 # 4️⃣ Cache control for performance
