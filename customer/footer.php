@@ -1,4 +1,3 @@
-
 <footer class="footer">
   <p>&copy; 2025 Mad Smile – Because every smile deserves a gift.</p>
 
@@ -8,8 +7,7 @@
     <a href="https://www.instagram.com/mad_smileee" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
   </div>
 </footer>
-
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 
 <style>
 :root {
@@ -18,17 +16,11 @@
   --shadow: 0 4px 24px rgba(239,216,214,0.25);
 }
 
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #fff8f6, #ffeecb);
-  display: flex;
-  flex-direction: column;
-}
 main {
   flex: 1;
+  /* --- THIS IS THE UPDATE --- */
+  /* Adds space at the bottom of your main content */
+  padding-bottom: 4rem; 
 }
 
 
@@ -41,7 +33,6 @@ main {
   font-size: 1.15rem;
   box-shadow: 0 4px 24px rgba(239, 216, 214, 0.25);
   border-radius: 0 0 25px 25px;
-  animation: fadeIn 1.5s;
 }
 
 .footer p {
@@ -77,9 +68,11 @@ main {
   box-shadow: 0 6px 16px rgba(239, 216, 214, 0.8);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Hides the footer on mobile devices */
+/* This will now hide the footer on all screens 992px wide or smaller */
+@media (max-width: 992px) {
+  .footer {
+    display: none;
+  }
 }
-
 </style>

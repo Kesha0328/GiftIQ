@@ -26,6 +26,7 @@ $items = $conn->query($sql_items);
 <head>
 <meta charset="UTF-8">
 <link rel="icon" type="image/png" href="../uploads/favicon.png" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <title>Invoice #<?= $order['id']; ?> - GiftIQ</title>
 <style>
 @import url('https://i.ibb.co/Kxb6CC0Y/logo.png');

@@ -1,171 +1,271 @@
 /* =========================================
-   1. ROOT VARIABLES
+    1. ROOT VARIABLES
    ========================================= */
 :root {
-  --accent-pink: #f7d4d1;
-  --accent-gold: #ffe6b3;
-  --accent-text: #d47474;
-  --white: #fff;
-  --shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    /* Variables from your header file for consistency */
+    --header-height: 75px;
+    --mobile-nav-height: 60px;
+
+    /* Your theme colors */
+    --accent-pink: #f7d4d1;
+    --accent-gold: #ffe6b3;
+    --accent-text: #d47474;
+    --white: #fff;
+    --border: #f3e6e2;
+    
+    /* New shadows for a softer, more professional look */
+    --shadow-soft: 0 12px 32px rgba(212, 116, 116, 0.08);
+    --shadow-hover: 0 16px 36px rgba(247, 180, 163, 0.3);
 }
 
 /* =========================================
-   2. BASE & RESET
+    2. BASE & RESET
    ========================================= */
 html,
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #fff8f6, #ffeecb);
-  min-height: 100vh;
-  overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #fff8f6, #ffeecb);
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* =========================================
-   3. SHARED COMPONENTS
+    3. SHARED COMPONENTS
    ========================================= */
 
 /* --- Page Header --- */
 .collection-header {
-  text-align: center;
-  margin: 2.5rem 0 1.6rem;
+    text-align: center;
+    margin: 3rem 0 2.5rem;
 }
 .collection-header h1 {
-  background: linear-gradient(90deg, #f4b8b4, #ffd9a0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 2rem;
-  font-weight: 700;
+    background: linear-gradient(90deg, #f4b8b4, #ffd9a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.25rem;
+    font-weight: 700;
 }
 
 /* --- Primary Button --- */
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink));
-  border: none;
-  color: #fff;
-  padding: .9rem;
-  border-radius: 12px;
-  font-weight: 700;
-  width: 100%;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  position: relative;
-  z-index: 10;
-  margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink));
+    border: none;
+    color: var(--white);
+    padding: .9rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    position: relative;
+    z-index: 10;
+    margin-bottom: 1rem;
+    box-sizing: border-box; /* Ensure padding is included */
 }
 .btn-primary:hover {
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-3px); /* 'Lift' effect */
+}
+.btn-primary:active {
+    transform: translateY(-1px); /* Click effect */
 }
 
 /* =========================================
-   4. MAIN LAYOUT CONTAINER
+    4. MAIN LAYOUT CONTAINER
    ========================================= */
 .customize-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 2rem;
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto 5rem;
-  padding-bottom: 80px; /* Extra space at the bottom */
+    /* Switched to CSS Grid for a more robust layout */
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* Form is 1.5 parts, preview is 1 */
+    gap: 2.5rem;
+    width: 90%;
+    max-width: 1300px;
+    margin: 0 auto 5rem;
+    padding-bottom: 80px;
+    align-items: flex-start;
 }
 
 /* =========================================
-   5. CUSTOMIZE FORM SECTION (Left Column)
+    5. CUSTOMIZE FORM SECTION (Left Column)
    ========================================= */
 .customize-section {
-  flex: 1 1 55%; /* Takes 55% of the space */
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-}
-.customize-section h2 {
-  color: var(--accent-text);
-  text-align: center;
-  margin-bottom: 1rem;
+    /* "Acryllic Glass" Panel Style */
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-soft);
+
+    /* Animation */
+    animation: fadeInUp 0.7s 0.1s ease-out both;
 }
 
-/* --- Form element styles --- */
+.customize-section h2 {
+    color: var(--accent-text);
+    margin-top: 0;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    font-weight: 700;
+    letter-spacing: -0.5px; /* Professional touch */
+}
+
+/* --- Modern Form element styles --- */
 .customize-section label {
-  display: block;
-  color: var(--accent-text);
-  font-weight: 600;
-  margin-bottom: .4rem;
+    display: block;
+    color: var(--accent-text);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
 }
 .customize-section select,
 .customize-section textarea,
 .customize-section input {
-  width: 100%;
-  padding: .8rem;
-  border: 2px solid #f3dede;
-  border-radius: 10px;
-  background: #fffdfb;
-  margin-bottom: 1rem;
-  font-size: 1rem;
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.5); /* Glassy input */
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    /* This transition is key for the 'pop' */
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-sizing: border-box; /* Crucial for 100% width */
 }
+
+/* This is the 'minimal attraction' you asked for */
+.customize-section select:focus,
+.customize-section textarea:focus,
+.customize-section input:focus {
+    background: var(--white); /* Becomes opaque */
+    border-color: var(--accent-text);
+    /* A satisfying 'glow' */
+    box-shadow: 0 0 0 4px rgba(212, 116, 116, 0.1);
+    outline: none;
+    transform: scale(1.01); /* Subtle "pop" */
+}
+
 textarea {
-  min-height: 80px;
-  resize: vertical;
+    min-height: 80px;
+    resize: vertical;
 }
 
 /* =========================================
-   6. LIVE PREVIEW (Right Column)
+    6. LIVE PREVIEW (Right Column)
    ========================================= */
 .live-preview {
-  flex: 1 1 40%; /* Takes 40% of the space */
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 18px;
-  box-shadow: var(--shadow);
-  position: sticky; /* Sticks to the top on desktop scroll */
-  top: 6rem;
-  align-self: flex-start;
-  transition: all .4s ease;
+    /* "Acryllic Glass" Panel Style */
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--shadow-soft);
+    
+    position: sticky;
+    /* Sticks 2rem below your sticky header */
+    top: calc(var(--header-height) + 2rem);
+    
+    min-height: 350px; /* Gives it substance */
+    
+    /* Staggered Animation */
+    animation: fadeInUp 0.7s 0.2s ease-out both;
 }
 .live-preview h3 {
-  color: #f3a5a3;
-  margin-bottom: 1rem;
-  font-weight: 700;
+    color: #f3a5a3;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 /* =========================================
-   7. KEYFRAME ANIMATIONS
+    7. KEYFRAME ANIMATIONS
    ========================================= */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* =========================================
-   8. RESPONSIVE (Tablet & Mobile)
+    8. RESPONSIVE (Tablet)
    ========================================= */
-@media (max-width: 900px) {
-  /* Stack the columns vertically */
-  .customize-container {
-    flex-direction: column;
-    align-items: center;
-  }
+@media (max-width: 992px) {
+    .customize-container {
+        /* Stacks to a single column */
+        grid-template-columns: 1fr;
+        width: 90%; /* Keeps some margin */
+        gap: 2rem;
+    }
 
-  /* Make both columns full-width and remove sticky positioning */
-  .customize-section,
-  .live-preview {
-    width: 95%;
-    position: static; /* Un-sticks the preview panel */
-    margin: 0 auto 1.5rem;
-  }
+    .live-preview {
+        position: static; /* Un-sticks the preview panel */
+        order: 2; /* Moves preview panel below form */
+        min-height: auto; /* Resets min-height */
+        animation-delay: 0s; /* Removes animation delay */
+    }
 
-  /* Move the preview panel below the form */
-  .live-preview {
-    order: 2;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  }
+    .customize-section {
+        animation-delay: 0s; /* Removes animation delay */
+    }
+}
+
+/* =========================================
+    9. RESPONSIVE (Mobile)
+   ========================================= */
+@media (max-width: 600px) {
+    .customize-container {
+        width: 100%;
+        padding: 0 1rem; /* Full-width with nice padding */
+        box-sizing: border-box;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .customize-section,
+    .live-preview {
+        padding: 1.5rem; /* Reduce padding for small screens */
+    }
+
+    .collection-header {
+        margin: 2rem 0 1.5rem;
+    }
+    .collection-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .customize-section h2,
+    .live-preview h3 {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .customize-section select,
+    .customize-section textarea,
+    .customize-section input {
+        padding: 0.9rem;
+        font-size: 0.95rem;
+    }
+    
+    .btn-primary {
+        font-size: 1rem;
+        padding: 0.9rem;
+    }
 }

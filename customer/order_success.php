@@ -15,6 +15,7 @@ $order_id = intval($_GET['order_id']);
   <meta charset="UTF-8">
   <title>Order Success - GiftIQ</title>
   <link rel="icon" type="image/png" href="../uploads/favicon.png" />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {

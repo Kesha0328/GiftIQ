@@ -484,6 +484,19 @@ img {
 
 /* --- 8.1 Tablet (approx 601px - 768px) --- */
 @media (max-width: 768px) {
+
+  /* --- THIS IS THE REAL FIX ---
+    This adds 100px of padding to the bottom of your 
+    main content area *only* on tablet and mobile.
+    This pushes all your content up so the "Send Feedback"
+    button is clearly visible above the fixed bottom navbar.
+  */
+  main {
+    padding-bottom: 100px;
+  }
+  /* -------------------------- */
+
+
   /* Reduce padding on mobile for all sections */
   .hero,
   .about-hampers,

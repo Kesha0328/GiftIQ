@@ -1,434 +1,232 @@
 /* =========================================
-   1. ROOT VARIABLES
+    1. ROOT VARIABLES & GLOBAL STYLES
    ========================================= */
 :root {
-  --bg-light: #f7f3ed;
+    --font: "Poppins", sans-serif;
   --accent-pink: #efd8d6;
   --accent-gold: #ffe6b3;
-  --text-muted: #c2c6b9;
+  --accent-text: #d47474; /* Used for headings */
   --text-dark: #333;
-  --font-primary: 'Poppins', sans-serif;
-  --shadow: 0 4px 24px rgba(239, 216, 214, 0.18);
+  --text-light: #666;
+  --border-color: #f0e9e9; /* Softer border */
+  --bg-card: #ffffff;
+  --bg-page: #fdfcfa; /* A very subtle, warm off-white */
+  
+  /* Softer, more professional shadows */
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-/* =========================================
-   2. GLOBAL & BASE STYLES
-   ========================================= */
+/* Global styles are in header.php, but we can override 
+  the body background for just this page.
+*/
 body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  color: #333;
-  background: linear-gradient(120deg, #efd8d6, #ffe6b3, #f7f3ed, #efd8d6);
-  background-size: 400% 400%;
-  animation: gradientMove 8s ease-in-out infinite;
-  transition: background 0.4s, color 0.4s;
-}
-
-a {
-  text-decoration: none !important;
+  font-family: var(--font);
+  background: var(--bg-page);
+  color: var(--text-dark);
 }
 
 /* =========================================
-   3. KEYFRAME ANIMATIONS
-   ========================================= */
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes fadeInCard {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* =========================================
-   4. UTILITY CLASSES
-   ========================================= */
-.fadeInUp {
-  animation: fadeInUp 1.2s;
-}
-
-/* =========================================
-   5. COMPONENT: COLLECTION HEADER
+    2. NEW COLLECTION HEADER
    ========================================= */
 .collection-header {
-  background: linear-gradient(90deg, #efd8d6 60%, #ffe6b3 100%);
-  box-shadow: 0 4px 24px #efd8d6;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  background-color: var(--bg-page);
+  border-bottom: 1px solid var(--border-color);
   margin-bottom: 2rem;
-  padding: 2.5rem 2vw 2rem 2vw;
-  position: relative;
 }
+
 .collection-header h1 {
   font-size: 2.5rem;
-  color: #fff;
-  font-weight: 900;
-  letter-spacing: 2px;
-  margin-bottom: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
-.header-icon {
-  font-size: 3rem;
-  animation: bounce 1.5s infinite alternate;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0;
 }
 
-/* =========================================
-   6. COMPONENT: FILTERS
-   ========================================= */
-.filters {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.2rem;
-  padding: 1rem 2rem;
-}
-.filter-select {
-  background: #fff;
-  border: 2px solid #efd8d6;
-  border-radius: 10px;
-  padding: 0.7rem 1.2rem;
+.collection-header p {
   font-size: 1.1rem;
-  color: #e2c3c1;
-  font-weight: 500;
-  box-shadow: 0 2px 8px #efd8d6;
-  transition: border-color 0.3s, box-shadow 0.3s, transform 0.2s;
-}
-.filter-select:focus,
-.filter-select:hover {
-  border-color: #ffe6b3;
-  box-shadow: 0 4px 16px #ffe6b3;
-  transform: scale(1.05);
-  outline: none;
+  color: var(--text-light);
+  margin: 0.5rem 0 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* =========================================
-   7. COMPONENT: CATEGORY SECTION (Horizontal Scroll)
+    3. CATEGORY SECTION
    ========================================= */
 .category-section {
-  margin: 2.5rem 0;
-  padding: 0 2vw;
-  animation: fadeInUp 1.2s;
+  width: 90%;
+  max-width: 1200px;
+  margin: 2rem auto 4rem auto;
 }
+
 .category-section h2 {
-  font-size: 1.6rem;
-  color: #efd8d6;
-  margin-bottom: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 1px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--accent-text);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
 }
-.category-cards {
-  display: flex;
-  gap: 2rem;
-  overflow-x: auto;
-  padding-bottom: 1rem; /* Space for scrollbar */
-  scroll-snap-type: x mandatory;
-  animation: fadeInUp 1.2s;
-}
-/* Custom scrollbar for horizontal container */
-.category-cards::-webkit-scrollbar {
-  height: 8px;
-}
-.category-cards::-webkit-scrollbar-thumb {
-  background: #efd8d6;
-  border-radius: 4px;
+
+.no-products {
+  color: var(--text-light);
+  font-style: italic;
 }
 
 /* =========================================
-   8. COMPONENT: CARD (Used in Category Section)
+    4. RESPONSIVE CARD GRID
+   ========================================= */
+.category-grid {
+  display: grid;
+  /* Mobile-First: Default to 1 column.
+    We will add more columns in media queries.
+  */
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+/* =========================================
+    5. CARD DESIGN
    ========================================= */
 .card {
-  min-width: 260px;
-  max-width: 300px;
-  background: #fff;
+  background: var(--bg-card);
   border-radius: 16px;
-  box-shadow: 0 4px 24px #efd8d6;
-  padding: 1.5rem 1rem 1rem 1rem;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  scroll-snap-align: start; /* For horizontal scroll */
-  transition: transform 0.3s, box-shadow 0.3s;
-  position: relative;
-  overflow: hidden;
-  animation: fadeInCard 1s;
+  overflow: hidden; /* Ensures image corners are rounded */
+
+  /* ANIMATION: 
+    Start invisible. The JS 'is-visible' class will make it fade in.
+    We ONLY use opacity, as requested.
+  */
+  opacity: 0;
+  transition: 
+    opacity 0.6s ease-out,
+    box-shadow 0.3s ease-out,
+    border-color 0.3s ease-out;
 }
-.card img {
-  width: 220px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 12px #efd8d6;
-  transition: transform 0.3s;
+
+.card.is-visible {
+  opacity: 1;
 }
-.card h3 {
-  font-size: 1.2rem;
-  color: #efd8d6;
-  margin-bottom: 0.5rem;
-  text-align: center;
-}
-.card p {
-  font-size: 1.1rem;
-  color: #333;
-  margin-bottom: 1rem;
-}
-.card .details {
-  font-size: 0.95rem;
-  color: #888;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-/* Card hover effects */
+
+/* NEW HOVER EFFECT (No Transform/Scale):
+  We make the shadow and border "pop" instead.
+*/
 .card:hover {
-  transform: translateY(-10px) scale(1.03);
-  box-shadow: 0 8px 32px #efd8d6;
-}
-.card:hover img {
-  transform: scale(1.07);
+  border-color: var(--accent-pink);
+  box-shadow: var(--shadow-hover);
 }
 
-/* =========================================
-   9. COMPONENT: BUTTON (Shared style)
-   ========================================= */
-/* This style is used in both .card and .customize-card.
-   It was defined twice, but I've kept it separate
-   as you may want to change them independently later.
-*/
-.card .btn-primary {
-  display: block;
-  margin: 0 auto;
-  margin-top: 1rem;
-  width: auto;
-  min-width: 120px;
-  text-align: center;
-  padding: 0.6rem 1.5rem;
-  border-radius: 8px;
-  background: var(--accent-gold);
-  color: #fff;
-  font-weight: 600;
-  border: none;
-  box-shadow: 0 2px 12px #efd8d6;
-  cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-  position: relative;
-  overflow: hidden;
-}
-.card .btn-primary:hover {
-  background: var(--accent-pink);
-  color: #fff;
-  box-shadow: 0 4px 24px #efd8d6;
-  transform: scale(1.04);
+.card-image-container {
+  width: 100%;
+  height: 220px;
+  background: #f9f9f9;
 }
 
-/* =========================================
-   10. COMPONENT: CUSTOMIZE SECTION
-   ========================================= */
-.customize-section {
-  max-width: 900px;
-  margin: 3rem auto;
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: var(--shadow);
-  padding: 2.5rem 2rem;
-  animation: fadeInUp 1.2s;
+.card-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-.customize-section h2 {
-  text-align: center;
-  color: var(--accent-pink);
-  font-size: 2rem;
-  margin-bottom: 2rem;
-}
-.customize-options {
+
+.card-content {
+  padding: 1.5rem;
   display: flex;
-  gap: 2rem;
-  justify-content: center;
-  flex-wrap: wrap;
+  flex-direction: column;
+  flex-grow: 1; /* Makes footer (button) stick to the bottom */
 }
 
-/* =========================================
-   11. COMPONENT: CUSTOMIZE CARD
-   ========================================= */
-.customize-card {
-  background: var(--bg-light);
-  border-radius: 16px;
-  box-shadow: 0 2px 12px #efd8d6;
-  padding: 2rem 1.5rem;
-  flex: 1 1 220px; /* Flex-grow, flex-shrink, flex-basis */
-  min-width: 220px;
-  max-width: 320px;
-  text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-  animation: fadeInCard 1.2s;
-}
-.customize-card i {
-  font-size: 2.5rem;
-  color: var(--accent-pink);
-  margin-bottom: 1rem;
-  transition: color 0.3s;
-}
-.customize-card h3 {
-  color: var(--accent-pink);
-  font-size: 1.2rem;
-  margin-bottom: 0.5rem;
-}
-.customize-card p {
-  color: var(--text-dark);
-  font-size: 1rem;
-}
-/* Customize card hover effects */
-.customize-card:hover {
-  background: var(--accent-gold);
-  transform: translateY(-8px) scale(1.04);
-  box-shadow: 0 8px 32px #efd8d6;
-}
-.customize-card:hover i {
-  color: #333;
-}
-.customize-card:hover h3 {
-  color: #333;
-}
-
-/* Button style for customize card */
-.customize-card .btn-primary {
-  display: block;
-  margin: 0 auto;
-  margin-top: 1rem;
-  width: auto;
-  min-width: 120px;
-  text-align: center;
-  padding: 0.6rem 1.5rem;
-  border-radius: 8px;
-  background: var(--accent-gold);
-  color: #fff;
+.card-content h3 {
+  font-size: 1.25rem;
   font-weight: 600;
-  border: none;
-  box-shadow: 0 2px 12px #efd8d6;
-  cursor: pointer;
-  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-  position: relative;
-  overflow: hidden;
+  color: var(--text-dark);
+  margin: 0 0 0.5rem 0;
 }
-.customize-card .btn-primary:hover {
-  background: var(--accent-pink);
-  color: #fff;
-  box-shadow: 0 4px 24px #efd8d6;
-  transform: scale(1.04);
+
+.card-content .details {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.card-content .price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent-text);
+  margin: 0 0 1rem 0;
+}
+
+.card-content form {
+  margin-top: auto; /* Pushes the button to the bottom */
 }
 
 /* =========================================
-   12. RESPONSIVE MEDIA QUERIES
+    6. SHARED BUTTON
+   ========================================= */
+.btn-primary {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  background: var(--accent-gold);
+  color: var(--text-dark);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: 
+    filter 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.btn-primary i {
+  margin-right: 0.5rem;
+}
+
+/* NEW HOVER EFFECT (No Transform/Scale):
+  We use the 'filter' property.
+*/
+.btn-primary:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 4px 15px rgba(255, 230, 179, 0.6);
+}
+
+/* =========================================
+    7. RESPONSIVENESS
    ========================================= */
 
-/* --- Tablet (and large phone) styles --- */
-@media (max-width: 900px) {
-  .category-cards {
-    gap: 1rem;
+/* --- Tablet (e.g., iPads) --- */
+@media (min-width: 600px) {
+  .collection-header h1 {
+    font-size: 2.8rem;
   }
-  .card {
-    min-width: 220px;
-    max-width: 90vw;
-  }
-  .card img,
-  .customize-card img {
-    /* This rule was present, but .customize-card doesn't have an <img> tag */
-    width: 160px;
-    height: 110px;
+  
+  .category-grid {
+    /* Go to 2 columns */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* FIX: This media query was incorrectly nested inside the 900px one.
-   It is now separate and correct.
-*/
-/* --- Mobile styles --- */
-@media (max-width: 600px) {
-  /* Note: The following rules for .navbar, .logo, and .nav-links 
-    were in your original code but don't correspond to any
-    classes in the main CSS. They are preserved here.
-  */
-  .navbar {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem 2vw;
+/* --- Small Desktop --- */
+@media (min-width: 900px) {
+  .category-grid {
+    /* Go to 3 columns */
+    grid-template-columns: repeat(3, 1fr);
   }
-  .logo {
-    font-size: 1.5rem;
-  }
-  .nav-links {
-    gap: 0.8rem;
-  }
+}
 
-  /* FIX: This section was syntactically incorrect (rules nested).
-     It is now fixed.
-  */
-  .collection-header h1,
-  .category-section h2 {
-    font-size: 1.1rem; /* Original value */
-  }
-  .card {
-    min-width: 180px;
-    padding: 1rem 0.5rem;
-  }
-  .card img,
-  .customize-card img {
-    /* Original values */
-    width: 90vw;
-    height: 100px;
-  }
-  /* --- End of syntax fix --- */
-
-  /* Filter responsiveness added */
-  .filters {
-    flex-direction: column;
-    gap: 0.8rem;
-    padding: 1rem;
-  }
-  .filter-select {
-    width: 90%; /* Make filters stack nicely */
-    margin: 0 auto;
-  }
-
-  /* Customize section adjustments */
-  .customize-section {
-    padding: 1rem;
-    border-radius: 12px;
-    max-width: 95vw;
-  }
-  .customize-section h2 {
-    font-size: 1.3rem;
-  }
-  .customize-options {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: center;
-  }
-  .customize-card {
-    padding: 1.2rem 0.7rem;
-    min-width: 0;
-    max-width: 98vw;
-    width: 90vw; /* Ensure it doesn't look too small */
+/* --- Large Desktop --- */
+@media (min-width: 1200px) {
+  .category-grid {
+    /* Go to 4 columns on very wide screens */
+    grid-template-columns: repeat(4, 1fr);
   }
 }

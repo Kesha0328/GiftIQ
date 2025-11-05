@@ -62,6 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Verify OTP - GiftIQ</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../uploads/favicon.png" />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <style>
         /* =========================================
