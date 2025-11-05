@@ -10,6 +10,9 @@ session_start();
 
   <link rel="stylesheet" href="customer/assets/main.css">
   <link rel="stylesheet" href="customer/assets/index.css">
+  <!-- Add this in the <head> or right before your custom JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link rel="icon" type="image/png" href="uploads/favicon.png" />
   <script defer src="customer/assets/slider.js"></script>
