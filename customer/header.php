@@ -1,6 +1,6 @@
 <?php
 // customer/header.php
-// v8: Added !important to body padding to prevent overrides
+// v4: Re-balanced 1:2:1 desktop layout
 
 if (session_status() === PHP_SESSION_NONE) session_start();
 include __DIR__ . '/../config.php';
@@ -52,6 +52,7 @@ $current = basename($_SERVER['PHP_SELF']);
 // Base path for all assets and links
 $base_path = "/GiftIQ-main"; 
 ?>
+<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost https://kit.fontawesome.com https://cdnjs.cloudflare.com;">
 
 <header class="navbar-desktop" role="banner" aria-label="Main navigation">
     
@@ -133,7 +134,7 @@ $base_path = "/GiftIQ-main";
     </a>
     
     <?php if (!empty($_SESSION['fullname'])): ?>
-        <button id="mobileProfileToggle" class="navbar-mobile-btn <?= ($current == 'profile.php' || $current == 'my_order.php') ? 'active' : '' ?>" aria-label="Open profile menu" aria-expanded="false">
+        <button id="mobileProfileToggle" class="navbar-mobile-btn" aria-label="Open profile menu" aria-expanded="false">
             <?php if (!empty($user_avatar) && file_exists(__DIR__ . "/../uploads/profile/" . $user_avatar)): ?>
                 <img src="<?php echo $base_path; ?>/uploads/profile/<?= htmlspecialchars($user_avatar); ?>" alt="Profile" class="profile-avatar-img-mobile">
             <?php else: ?>
@@ -150,9 +151,10 @@ $base_path = "/GiftIQ-main";
 </nav>
 
 <?php if (!empty($_SESSION['fullname'])): ?>
-    <nav id="mobileProfileMenu" class="mobile-profile-dropdown" aria-hidden="true" role="dialog" aria-modal="true">
-        <div class="dropdown-header">
-            Hello, <strong><?= htmlspecialchars($_SESSION['fullname']) ?></strong>
+    <nav id="mobileProfileMenu" class="mobile-profile-menu" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="mobile-profile-header">
+            <span>Logged in as <strong><?= htmlspecialchars($_SESSION['fullname']) ?></strong></span>
+            <button id="mobileProfileClose" class="mobile-profile-close" aria-label="Close menu">✕</button>
         </div>
         <a href="<?php echo $base_path; ?>/customer/profile.php">
             <i class="fa fa-user-circle"></i> My Profile
@@ -160,7 +162,7 @@ $base_path = "/GiftIQ-main";
         <a href="<?php echo $base_path; ?>/customer/my_order.php">
             <i class="fa fa-box"></i> My Orders
         </a>
-        <a href="<?php echo $base_path; ?>/customer/help.php">
+        <a href="<?php echo $base_path; ?>/customer/contact.php">
             <i class="fa fa-question-circle"></i> Help
         </a>
         <a href="javascript:void(0);" onclick="confirmLogout();" class="logout-link">
@@ -172,15 +174,12 @@ $base_path = "/GiftIQ-main";
 <div id="menuOverlay" class="menu-overlay" tabindex="-1" aria-hidden="true"></div>
 
 <style>
-/* --- This imports the public Font Awesome library --- */
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
-
 /* --- Import Poppins Font (if not already imported) --- */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 /* --- Root Variables --- */
 :root {
-    --header-height: 75px; 
+    --header-height: 75px;
     --mobile-nav-height: 60px;
     --accent-pink: #f7d4d1;
     --accent-gold: #ffe6b3;
@@ -194,37 +193,21 @@ $base_path = "/GiftIQ-main";
     --gradient-hover: linear-gradient(135deg, #f7b4a3, #ffdba1);
 }
 
-/* --- Page Fade Animations --- */
-@keyframes bodyFadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-@keyframes bodyFadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
+/* --- Base Body Padding (for mobile bottom nav) --- */
 body {
-    animation: bodyFadeIn 0.2s ease-out;
-    /* THIS IS THE FIX: Added !important 
-      This prevents other CSS files from removing the padding.
-    */
-    padding-bottom: var(--mobile-nav-height) !important; 
-    padding-top: 65px !important; 
-}
-body.body-fading-out {
-    animation: bodyFadeOut 0.1s ease-in forwards; 
+    padding-bottom: var(--mobile-nav-height);
 }
 
 /* =========================================
-    DESKTOP HEADER (navbar-desktop)
-    ========================================= */
+   DESKTOP HEADER (navbar-desktop)
+   ========================================= */
 .navbar-desktop {
     position: sticky;
     top: 0;
     z-index: 1000;
     display: flex;
     align-items: center;
-    padding: 0 5%;
+    padding: 0 5%; /* Side padding */
     height: var(--header-height);
     background: var(--white);
     box-shadow: var(--shadow);
@@ -233,24 +216,29 @@ body.body-fading-out {
     height: 42px;
     display: block;
 }
+
+/* --- THIS IS THE FIX: 1:2:1 Layout --- */
 .nav-left {
-    flex: 1; 
+    flex: 1; /* 1 part */
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-start; /* Align logo left */
 }
 .nav-center {
-    flex: 2; 
+    flex: 2; /* 2 parts (main space) */
     display: flex;
     justify-content: center;
-    gap: 2.5rem; 
+    gap: 1.5rem; /* Increased gap to fill space */
 }
 .nav-right {
-    flex: 1; 
+    flex: 1; /* 1 part */
     display: flex;
-    justify-content: flex-end; 
+    justify-content: flex-end; /* Align items right */
     align-items: center;
-    gap: 1.25rem; 
+    padding: 10px;
+    gap: 1rem;
 }
+/* --- End of Fix --- */
+
 
 /* --- Center Nav Links --- */
 .nav-center a {
@@ -272,16 +260,9 @@ body.body-fading-out {
 .nav-icon-link {
     position: relative;
     color: var(--text-light);
+    font-size: 1.5rem;
     text-decoration: none;
     transition: color 0.2s ease;
-}
-/* --- ICON FIX 1: Target <i> AND <svg> --- */
-.navbar-desktop .nav-icon-link i,
-.navbar-desktop .nav-icon-link svg {
-    font-size: 1.25rem !important; 
-    width: 1.25rem !important;
-    height: 1.25rem !important;
-    vertical-align: middle;
 }
 .nav-icon-link:hover {
     color: var(--accent-text);
@@ -317,7 +298,7 @@ body.body-fading-out {
     box-shadow: 0 4px 10px rgba(247, 180, 163, 0.3);
 }
 
-/* --- Profile Dropdown (Desktop) --- */
+/* --- Profile Dropdown --- */
 .profile-dropdown-container {
     position: relative;
 }
@@ -391,12 +372,8 @@ body.body-fading-out {
     border-radius: 8px;
     transition: all 0.2s ease;
 }
-/* --- ICON FIX 2: Target <i> AND <svg> --- */
-nav.profile-dropdown a i,
-nav.profile-dropdown a svg {
-    font-size: 1.25rem !important; 
-    width: 1.25rem !important; 
-    height: 1.25rem !important;
+.profile-dropdown a i {
+    width: 18px;
     text-align: center;
     color: var(--accent-text);
 }
@@ -412,36 +389,27 @@ nav.profile-dropdown a svg {
 }
 
 /* =========================================
-    MOBILE HEADER (TOP BAR)
-    ========================================= */
+   MOBILE HEADER (TOP BAR)
+   ========================================= */
 .navbar-mobile-top {
-    position: fixed;
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
     z-index: 999;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 5%;
-    height: 65px; 
+    height: var(--header-height);
     background: var(--white);
     box-shadow: var(--shadow);
 }
 .navbar-mobile-top .logo-img {
     height: 40px;
 }
-/* --- ICON FIX 3: Target <i> AND <svg> --- */
-.navbar-mobile-top .nav-icon-link i,
-.navbar-mobile-top .nav-icon-link svg {
-    font-size: 1.25rem !important;
-    width: 1.25rem !important;
-    height: 1.25rem !important;
-}
 
 /* =========================================
-    MOBILE NAVIGATION (BOTTOM BAR)
-    ========================================= */
+   MOBILE NAVIGATION (BOTTOM BAR)
+   ========================================= */
 .navbar-mobile-bottom {
     position: fixed;
     bottom: 0;
@@ -471,188 +439,222 @@ nav.profile-dropdown a svg {
     border: none;
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
-    flex: 1;
-    text-align: center;
 }
-/* --- ICON FIX 4: Target <i> AND <svg> --- */
-nav.navbar-mobile-bottom a i,
-nav.navbar-mobile-bottom .navbar-mobile-btn i,
-nav.navbar-mobile-bottom a svg,
-nav.navbar-mobile-bottom .navbar-mobile-btn svg {
-    font-size: 1.25rem !important;
-    width: 1.25rem !important;
-    height: 1.25rem !important;
+.navbar-mobile-bottom a i,
+.navbar-mobile-btn i {
+    font-size: 1.25rem;
 }
 .navbar-mobile-bottom a.active,
 .navbar-mobile-btn.active {
     color: var(--accent-text);
-}
-.cart-link-mobile {
-    position: relative;
-}
-.navbar-mobile-bottom .cart-count {
-    top: -4px;
-    right: 15px;
-    width: 18px;
-    height: 18px;
-    font-size: 0.7rem;
 }
 .profile-avatar-img-mobile {
     width: 22px;
     height: 22px;
     border-radius: 50%;
     object-fit: cover;
-    border: 1px solid var(--text-light);
-}
-.navbar-mobile-btn.active .profile-avatar-img-mobile {
-    border-color: var(--accent-text);
+    border: 1px solid var(--accent-text);
 }
 
 /* =========================================
-    MOBILE PROFILE DROPDOWN
-    ========================================= */
-.mobile-profile-dropdown {
+   MOBILE PROFILE MENU
+   ========================================= */
+.mobile-profile-menu {
     position: fixed;
-    bottom: calc(var(--mobile-nav-height) + 10px); 
-    right: 10px;
-    width: 220px;
+    bottom: var(--mobile-nav-height);
+    left: 0;
+    right: 0;
     background: var(--white);
-    border-radius: 12px;
-    box-shadow: var(--shadow-strong);
-    border: 1px solid var(--border);
-    padding: 0.5rem;
     z-index: 1001;
-    opacity: 0;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
     visibility: hidden;
-    transform: translateY(10px);
-    transition: all 0.2s ease-out;
+    transform: translateY(100%);
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+    padding: 0.5rem;
+    padding-bottom: 1rem;
 }
-.mobile-profile-dropdown.open {
-    opacity: 1;
+.mobile-profile-menu.open {
     visibility: visible;
     transform: translateY(0);
 }
-.mobile-profile-dropdown .dropdown-header {
-    padding: 0.75rem 1rem;
-    font-size: 0.9rem;
+.mobile-profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
     color: var(--text-light);
-    border-bottom: 1px solid var(--border);
 }
-.mobile-profile-dropdown .dropdown-header strong {
-    color: var(--text-dark);
+.mobile-profile-close {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    color: var(--text-light);
+    cursor: pointer;
 }
-.mobile-profile-dropdown a {
+.mobile-profile-menu a {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
+    gap: 1rem;
+    padding: 0.9rem 1.25rem;
     text-decoration: none;
     color: var(--text-dark);
     font-weight: 500;
-    font-size: 0.95rem;
     border-radius: 8px;
     transition: all 0.2s ease;
 }
-/* --- ICON FIX 5: Target <i> AND <svg> --- */
-nav.mobile-profile-dropdown a i,
-nav.mobile-profile-dropdown a svg {
-    font-size: 1.25rem !important; 
-    width: 1.25rem !important; 
-    height: 1.25rem !important;
+.mobile-profile-menu a i {
+    width: 20px;
     text-align: center;
     color: var(--accent-text);
+    font-size: 1.1rem;
 }
-.mobile-profile-dropdown a:hover {
+.mobile-profile-menu a:hover,
+.mobile-profile-menu a:active {
     background: #fff7f6;
     color: var(--accent-text);
 }
-.mobile-profile-dropdown a.logout-link {
+.mobile-profile-menu a.logout-link {
     color: #e53935;
 }
-.mobile-profile-dropdown a.logout-link:hover {
+.mobile-profile-menu a.logout-link:hover {
     background: #fff0f0;
 }
 
 /* =========================================
-    OVERLAY & RESPONSIVE HIDING
-    ========================================= */
+   OVERLAY & RESPONSIVE HIDING
+   ========================================= */
 .menu-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(0px); 
+    background: rgba(0, 0, 0, 0.45);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, backdrop-filter 0.3s ease; 
+    transition: opacity 0.3s ease;
     z-index: 1000;
 }
 .menu-overlay.active {
     opacity: 1;
     visibility: visible;
-    backdrop-filter: blur(4px);
 }
 
 @media (max-width: 992px) {
+    /* Hide desktop nav, show mobile navs */
     .navbar-desktop {
         display: none;
     }
 }
 @media (min-width: 993px) {
+    /* Hide mobile navs, show desktop nav */
     .navbar-mobile-top,
     .navbar-mobile-bottom,
-    .mobile-profile-dropdown,
-    .menu-overlay { 
+    .mobile-profile-menu,
+    .menu-overlay { /* Also hide overlay on desktop */
         display: none !important;
     }
+    /* Remove body padding on desktop */
     body {
-        padding-bottom: 0 !important; /* Made !important */
-        padding-top: 0 !important; /* Made !important */
+        padding-bottom: 0;
     }
 }
 
-/* =Settings...CSS (unchanged) */
-.my-swal-popup{font-family:'Poppins',sans-serif;border-radius:16px;border:1px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,.08)}.my-swal-title{font-family:'Poppins',sans-serif;color:#d47474;font-weight:600;font-size:1.6rem}.my-swal-text{color:#666;font-size:1rem}.my-swal-icon{color:#d47474;border-color:#f7d4d1}.my-swal-popup .swal2-actions{gap:.75rem}.my-swal-confirm,.my-swal-cancel{font-family:'Poppins',sans-serif;font-weight:600!important;border-radius:10px!important;padding:.7rem 1.5rem!important;font-size:.95rem!important;border:none!important;transition:all .2s ease!important;box-shadow:none!important}.my-swal-confirm{background:linear-gradient(135deg,#ffe6b3,#f7d4d1)!important;color:#333!important}.my-swal-confirm:hover{opacity:.9;transform:translateY(-2px)}.my-swal-confirm:focus{box-shadow:0 0 0 3px rgba(247,212,209,.5)!important}.my-swal-cancel{background:#f1f1f1!important;color:#666!important}.my-swal-cancel:hover{background:#e7e7e7!important}.my-swal-cancel:focus{box-shadow:0 0 0 3px rgba(0,0,0,.1)!important}
+/* =========================================
+   CUSTOM LOGOUT POP-UP STYLES
+   ========================================= */
+.my-swal-popup {
+    font-family: 'Poppins', sans-serif;
+    border-radius: 16px;
+    border: 1px solid #fff;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.my-swal-title {
+    font-family: 'Poppins', sans-serif;
+    color: #d47474;
+    font-weight: 600;
+    font-size: 1.6rem;
+}
+.my-swal-text {
+    color: #666;
+    font-size: 1rem;
+}
+.my-swal-icon {
+    color: #d47474;
+    border-color: #f7d4d1;
+}
+.my-swal-popup .swal2-actions {
+    gap: 0.75rem;
+}
+.my-swal-confirm,
+.my-swal-cancel {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    padding: 0.7rem 1.5rem !important;
+    font-size: 0.95rem !important;
+    border: none !important;
+    transition: all 0.2s ease !important;
+    box-shadow: none !important;
+}
+.my-swal-confirm {
+    background: linear-gradient(135deg, #ffe6b3, #f7d4d1) !important;
+    color: #333 !important;
+}
+.my-swal-confirm:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+.my-swal-confirm:focus {
+    box-shadow: 0 0 0 3px rgba(247, 212, 209, 0.5) !important;
+}
+.my-swal-cancel {
+    background: #f1f1f1 !important;
+    color: #666 !important;
+}
+.my-swal-cancel:hover {
+    background: #e7e7e7 !important;
+}
+.my-swal-cancel:focus {
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1) !important;
+}
 </style>
 
-<script>
-(function(){
-    // --- Get all menu elements ---
-    var profileToggle = document.getElementById('profileToggle');       // Desktop avatar
-    var profileMenu = document.getElementById('profileMenu');       // Desktop dropdown
-    
-    var mobileProfileToggle = document.getElementById('mobileProfileToggle'); // Mobile profile button
-    var mobileProfileMenu = document.getElementById('mobileProfileMenu');   // Mobile dropdown
-    
-    var overlay = document.getElementById('menuOverlay');         // Universal overlay
+<script>src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"</script>
 
-    // --- Desktop Profile Dropdown Logic ---
+<script>
+
+
+(function(){
+    // --- Desktop Profile Dropdown ---
+    var profileToggle = document.getElementById('profileToggle');
+    var profileMenu = document.getElementById('profileMenu');
+    var desktopOverlay = document.getElementById('menuOverlay'); // Re-using the overlay
+
     if (profileToggle && profileMenu) {
         profileToggle.addEventListener('click', function(e) {
             e.stopPropagation();
-            // Close mobile menu if it's open
-            if (mobileProfileMenu && mobileProfileMenu.classList.contains('open')) {
-                closeMobileMenu();
-            }
-            // Toggle desktop menu
             var isOpen = profileMenu.classList.toggle('open');
             profileToggle.setAttribute('aria-expanded', isOpen);
             profileMenu.setAttribute('aria-hidden', !isOpen);
-            overlay.classList.toggle('active', isOpen);
+            desktopOverlay.classList.toggle('active', isOpen);
         });
     }
 
-    // --- Mobile Profile Dropdown Logic ---
+    // --- Mobile Profile Menu ---
+    var mobileProfileToggle = document.getElementById('mobileProfileToggle');
+    var mobileProfileMenu = document.getElementById('mobileProfileMenu');
+    var mobileProfileClose = document.getElementById('mobileProfileClose');
+    var mobileOverlay = document.getElementById('menuOverlay');
+
     if (mobileProfileToggle && mobileProfileMenu) {
         function openMobileMenu() {
-            // Close desktop menu if it's open
-            if (profileMenu && profileMenu.classList.contains('open')) {
-                closeDesktopMenu();
-            }
             mobileProfileMenu.classList.add('open');
             mobileProfileMenu.setAttribute('aria-hidden', 'false');
             mobileProfileToggle.setAttribute('aria-expanded', 'true');
             mobileProfileToggle.classList.add('active');
-            overlay.classList.add('active');
+            mobileOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
         }
 
         function closeMobileMenu() {
@@ -660,7 +662,8 @@ nav.mobile-profile-dropdown a svg {
             mobileProfileMenu.setAttribute('aria-hidden', 'true');
             mobileProfileToggle.setAttribute('aria-expanded', 'false');
             mobileProfileToggle.classList.remove('active');
-            overlay.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
         }
 
         mobileProfileToggle.addEventListener('click', function(e) {
@@ -671,40 +674,32 @@ nav.mobile-profile-dropdown a svg {
                 openMobileMenu();
             }
         });
+
+        if (mobileProfileClose) {
+            mobileProfileClose.addEventListener('click', closeMobileMenu);
+        }
     }
 
     // --- Universal Close Functionality ---
-    function closeDesktopMenu() {
-        if (profileMenu) {
+    function closeAllMenus() {
+        if (profileMenu && profileMenu.classList.contains('open')) {
             profileMenu.classList.remove('open');
             profileToggle.setAttribute('aria-expanded', 'false');
             profileMenu.setAttribute('aria-hidden', 'true');
-        }
-    }
-
-    function closeAllMenus() {
-        var wasOpen = false; 
-        
-        if (profileMenu && profileMenu.classList.contains('open')) {
-            closeDesktopMenu();
-            wasOpen = true;
+            desktopOverlay.classList.remove('active');
         }
         if (mobileProfileMenu && mobileProfileMenu.classList.contains('open')) {
-            if(typeof closeMobileMenu === 'function') {
-                closeMobileMenu();
-            }
-            wasOpen = true;
-        }
-        
-        if (wasOpen) {
-            overlay.classList.remove('active');
+            mobileProfileMenu.classList.remove('open');
+            mobileProfileMenu.setAttribute('aria-hidden', 'true');
+            mobileProfileToggle.setAttribute('aria-expanded', 'false');
+            mobileProfileToggle.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
         }
     }
 
     // Close menus when overlay is clicked
-    if (overlay) {
-        overlay.addEventListener('click', closeAllMenus);
-    }
+    desktopOverlay.addEventListener('click', closeAllMenus);
 
     // Close menus on 'Escape' key
     document.addEventListener('keydown', function(e){
@@ -722,65 +717,38 @@ nav.mobile-profile-dropdown a svg {
         });
     }
 
-
-    // --- Smooth Page Transition (Fade-Out) ---
-    function handleSmoothNavigation(event) {
-        if (event.ctrlKey || event.metaKey || event.button === 1) {
-            return;
-        }
-        event.preventDefault();
-        const destinationUrl = this.href;
-        document.body.classList.add('body-fading-out');
-        setTimeout(() => {
-            window.location.href = destinationUrl;
-        }, 100); 
-    }
-
-    // Select all internal navigation links
-    const selectors = [
-        '.nav-left a',
-        '.nav-center a',
-        '.nav-icon-link', // Added cart link
-        '.navbar-mobile-bottom a',
-        '.profile-dropdown a',
-        '.mobile-profile-dropdown a' 
-    ];
-
-    const navLinks = document.querySelectorAll(selectors.join(', '));
-
-    navLinks.forEach(link => {
-        if (link.href && !link.href.includes('javascript:void(0)')) {
-            link.addEventListener('click', handleSmoothNavigation);
-        }
-    });
-
 })();
 
 // --- Your Logout Confirmation Script (Unchanged) ---
 function confirmLogout() {
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You will be logged out of your session.",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, Log Out',
-        cancelButtonText: 'Cancel',
-        customClass: {
-            popup: 'my-swal-popup',
-            title: 'my-swal-title',
-            htmlContainer: 'my-swal-text',
-            icon: 'my-swal-icon',
-            confirmButton: 'my-swal-confirm',
-            cancelButton: 'my-swal-cancel'
-        }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Add fade-out effect before logging out
-            document.body.classList.add('body-fading-out');
-            setTimeout(() => {
-                window.location.href = '<?php echo $base_path; ?>/customer/logout.php';
-            }, 100); // Match fade-out animation
-        }
-    });
+  document.activeElement?.blur(); // fix focus warning
+
+  if (typeof Swal === 'undefined') {
+    if (confirm("Are you sure you want to log out?")) {
+      window.location.href = "/GiftIQ-main/customer/logout.php";
+    }
+    return;
+  }
+
+  Swal.fire({
+    title: 'Log Out?',
+    text: 'Are you sure you want to end your session?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, Log Out',
+    cancelButtonText: 'Cancel',
+    background: '#fffaf7',
+    color: '#333',
+    didOpen: () => {
+      document.querySelector('.swal2-confirm').style.cssText =
+        "background:linear-gradient(135deg,#f7b4a3,#ffdba1);color:#fff;font-weight:600;border:none;border-radius:10px;padding:10px 18px;";
+      document.querySelector('.swal2-cancel').style.cssText =
+        "background:#fff;color:#d47474;border:2px solid #f7d4d1;border-radius:10px;padding:10px 18px;font-weight:600;";
+    }
+  }).then(result => {
+    if (result.isConfirmed) {
+      window.location.href = "/GiftIQ-main/customer/logout.php";
+    }
+  });
 }
 </script>
