@@ -1,8 +1,8 @@
-<?php
-
+<<?php
+ob_start(); // ✅ Add output buffering to prevent header issues
 if (session_status() === PHP_SESSION_NONE) session_start();
-include __DIR__ . '/../config.php';
 
+include __DIR__ . '/../config.php';
 
 if (!isset($_SESSION['admin_id'])) {
     header("Location: login.php");
@@ -15,6 +15,8 @@ if (!isset($_SESSION['admin_id'])) {
   <meta charset="utf-8">
   <title>Admin • GiftIQ</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net;">
+
   <style>
     :root {
       --bg: #0e0f11;
@@ -225,8 +227,10 @@ if (!isset($_SESSION['admin_id'])) {
       <li><a href="dashboard.php" class="<?= basename($_SERVER['PHP_SELF'])=='dashboard.php'?'active':'' ?>"><span class="icon">🏠</span><span class="label">Dashboard</span></a></li>
       <li><a href="manage_orders.php" class="<?= basename($_SERVER['PHP_SELF'])=='manage_orders.php'?'active':'' ?>"><span class="icon">📦</span><span class="label">Orders</span></a></li>
       <li><a href="manage_products.php" class="<?= basename($_SERVER['PHP_SELF'])=='manage_products.php'?'active':'' ?>"><span class="icon">🛍</span><span class="label">Products</span></a></li>
+      <li><a href="manage_returns.php" class="<?= basename($_SERVER['PHP_SELF'])=='manage_returns.php'?'active':'' ?>"><span class="icon">↩</span><span class="label">Returns</span></a></li>
       <li><a href="manage_contacts.php" class="<?= basename($_SERVER['PHP_SELF'])=='manage_contacts.php'?'active':'' ?>"><span class="icon">📩</span><span class="label">Contacts</span></a></li>
       <li><a href="send_mail.php" class="<?= basename($_SERVER['PHP_SELF'])=='send_mail.php'?'active':'' ?>"><span class="icon">✉️</span><span class="label">Send Mail</span></a></li>
+      <li><a href="feedback_list.php" class="<?= basename($_SERVER['PHP_SELF'])=='feedback_list.php'?'active':'' ?>"><span class="icon">📝</span><span class="label">Feedbacks</span></a></li>
       <li><a href="../index.php" target="_blank"><span class="icon">🌐</span><span class="label">View Site</span></a></li>
       <li><a href="logout.php"><span class="icon">🔒</span><span class="label">Logout</span></a></li>
     </ul>
@@ -241,3 +245,5 @@ if (!isset($_SESSION['admin_id'])) {
       <div style="color:var(--muted)">Hello, <strong><?= htmlspecialchars($_SESSION['admin_user'] ?? 'Admin') ?></strong></div>
     </div>
   </header>
+
+  
