@@ -1,38 +1,37 @@
 <?php
-include '../config.php';
-header('Content-Type: application/json');
+include __DIR__ . '/../config.php';
 
-$daily = [];
-$res = $conn->query("SELECT DATE(created_at) AS d, SUM(total) AS s FROM orders GROUP BY DATE(created_at) ORDER BY d ASC");
-while ($r = $res->fetch_assoc()) {
-  $daily['labels'][] = $r['d'];
-  $daily['values'][] = (float)$r['s'];
-}
+// Daily sales
+$daily = $conn->query("
+  SELECT DATE(created_at) AS label, SUM(total) AS value
+  FROM orders
+  GROUP BY DATE(created_at)
+  ORDER BY DATE(created_at)
+");
+$dailyData = ['labels'=>[],'values'=>[]];
+while($r=$daily->fetch_assoc()){ $dailyData['labels'][]=$r['label']; $dailyData['values'][]=(float)$r['value']; }
 
-$monthly = [];
-$res2 = $conn->query("SELECT DATE_FORMAT(created_at, '%Y-%m') AS m, SUM(total) AS s FROM orders GROUP BY m ORDER BY m ASC");
-while ($r = $res2->fetch_assoc()) {
-  $monthly['labels'][] = $r['m'];
-  $monthly['values'][] = (float)$r['s'];
-}
+// Monthly sales
+$monthly = $conn->query("
+  SELECT DATE_FORMAT(created_at,'%Y-%m') AS label, SUM(total) AS value
+  FROM orders
+  GROUP BY DATE_FORMAT(created_at,'%Y-%m')
+  ORDER BY label
+");
+$monthlyData = ['labels'=>[],'values'=>[]];
+while($r=$monthly->fetch_assoc()){ $monthlyData['labels'][]=$r['label']; $monthlyData['values'][]=(float)$r['value']; }
 
-$top = [];
-$res3 = $conn->query("
-  SELECT p.name AS product, SUM(oi.quantity) AS qty
-  FROM order_items oi 
-  JOIN products p ON p.id = oi.product_id
-  GROUP BY oi.product_id 
-  ORDER BY qty DESC 
+// Top selling products
+$top = $conn->query("
+  SELECT p.name AS label, SUM(oi.quantity) AS value
+  FROM order_items oi
+  JOIN products p ON oi.product_id=p.id
+  GROUP BY p.name
+  ORDER BY value DESC
   LIMIT 5
 ");
-while ($r = $res3->fetch_assoc()) {
-  $top['labels'][] = $r['product'];
-  $top['values'][] = (int)$r['qty'];
-}
+$topData = ['labels'=>[],'values'=>[]];
+while($r=$top->fetch_assoc()){ $topData['labels'][]=$r['label']; $topData['values'][]=(int)$r['value']; }
 
-echo json_encode([
-  'daily' => $daily,
-  'monthly' => $monthly,
-  'top' => $top
-]);
-?>
+header('Content-Type: application/json');
+echo json_encode(['daily'=>$dailyData,'monthly'=>$monthlyData,'top'=>$topData]);
