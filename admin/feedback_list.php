@@ -1,7 +1,7 @@
-<?php 
+<?php
 include "../config.php";
 
-$result = $conn->query("SELECT * FROM feedbacks ORDER BY created_at DESC");
+$result = $conn->query("SELECT * FROM feedback ORDER BY created_at DESC");
 ?>
 
 <!DOCTYPE html>
